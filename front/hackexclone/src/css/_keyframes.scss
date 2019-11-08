@@ -1,0 +1,35 @@
+
+.alwaysBack {
+  opacity: 1 !important;
+  transition: none !important;
+  z-index: -1 !important;
+  left: 0 !important;
+}
+
+.fade-appear, .fade-enter {
+  // opacity: 0;
+  z-index: 1;
+
+  left: 101vw;
+}
+
+.fade-appear-active, .fade-enter.fade-enter-active {
+  // opacity: 1;
+  // transition: opacity 500ms linear 500ms;
+
+  left: 0;
+  transition: all 500ms;
+}
+
+.fade-exit {
+  // opacity: 1;
+  left: 0vw;
+}
+
+.fade-exit.fade-exit-active {
+  // opacity: 0;
+  // transition: opacity 500ms linear;
+
+  left: 101vw;
+  transition: all 500ms;
+}

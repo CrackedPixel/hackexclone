@@ -1,0 +1,204 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-size: 62.5%;
+  font-family: 'Roboto', sans-serif;
+}
+
+.alwaysBack {
+  opacity: 1 !important;
+  -webkit-transition: none !important;
+  transition: none !important;
+  z-index: -1 !important;
+  left: 0 !important;
+}
+
+.fade-appear, .fade-enter {
+  z-index: 1;
+  left: 101vw;
+}
+
+.fade-appear-active, .fade-enter.fade-enter-active {
+  left: 0;
+  -webkit-transition: all 500ms;
+  transition: all 500ms;
+}
+
+.fade-exit {
+  left: 0vw;
+}
+
+.fade-exit.fade-exit-active {
+  left: 101vw;
+  -webkit-transition: all 500ms;
+  transition: all 500ms;
+}
+
+.appPage {
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  width: 100%;
+  height: 100%;
+}
+
+.bg-home, .bg-login, .bg-register {
+  background: radial-gradient(#3A4E66, #313C4E, #313C4E);
+}
+
+.flip-x {
+  -webkit-transform: scaleX(-1);
+          transform: scaleX(-1);
+}
+
+.home__title {
+  padding-top: 1.5rem;
+}
+
+.home__title h1 {
+  font-size: 15vw;
+  color: #E2E8E7;
+}
+
+.home__logincontainer {
+  margin-bottom: 5rem;
+}
+
+.home__logincontainer .linkBtn {
+  color: black;
+  font-size: 11vw;
+  text-decoration: none;
+  background: #E2E8E7;
+  padding: 0.6rem 2.5rem;
+}
+
+.error.error-message {
+  color: red;
+  padding: 0.1rem 0 0.5rem 0;
+  width: 100%;
+}
+
+.login__infobox {
+  padding-top: 1.5rem;
+}
+
+.login__infobox h1 {
+  font-size: 15vw;
+  color: #E2E8E7;
+}
+
+.login__form, .register__form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  padding: 0 2rem;
+}
+
+.login__form .formik__form--container, .register__form .formik__form--container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  width: 100%;
+}
+
+.login__form .formik__form--container .formik__form--field, .register__form .formik__form--container .formik__form--field {
+  height: 2rem;
+  padding: 0 0.5rem;
+  background: transparent;
+  border: 1px solid #435552;
+  color: #E2E8E7;
+}
+
+.login__form .formik__form--container .loadingProgress, .register__form .formik__form--container .loadingProgress {
+  margin-top: 1rem;
+}
+
+.login__form .formik__form--container button, .register__form .formik__form--container button {
+  height: 2rem;
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
+  width: 100%;
+  background: -webkit-gradient(linear, left top, left bottom, from(#E4E4E4), to(#A1A0A3));
+  background: linear-gradient(to bottom, #E4E4E4, #A1A0A3);
+}
+
+.login__form span, .register__form span {
+  margin-top: 1rem;
+  font-size: 4vw;
+  color: #E2E8E7;
+}
+
+.login__form span .linkBtn, .register__form span .linkBtn {
+  text-decoration: none;
+  color: #A3E134;
+}
+
+.login__footer {
+  margin-bottom: 1.5rem;
+}
+
+.login__footer .linkBtn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 6vw;
+  text-decoration: none;
+  color: #A3E134;
+}
+
+.register__title {
+  padding-top: 1.5rem;
+}
+
+.register__title h1 {
+  font-size: 15vw;
+  color: #E2E8E7;
+}
+
+.register__footer {
+  margin-bottom: 1.5rem;
+}
+
+.register__footer .linkBtn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 6vw;
+  text-decoration: none;
+  color: #A3E134;
+}
+/*# sourceMappingURL=main.css.map */

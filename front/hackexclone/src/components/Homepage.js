@@ -1,0 +1,31 @@
+import React, {useState} from 'react'
+import {Link} from 'react-router-dom';
+
+export const Homepage = (props) => {
+  const [lcc, slcc] = useState(false);
+
+  const handleClicker = e => {
+    if (lcc) {
+      e.preventDefault();
+      return; 
+    }
+    if (props.propStateData.canClick){
+      slcc(true);
+      props.propStateData.setCanClick();
+    }else{
+      e.preventDefault();
+      return;
+    }
+  }
+
+  return (
+    <div className="appPage alwaysBack bg-home">
+      <section className="home__title">
+        <h1>Home</h1>
+      </section>
+      <section className="home__logincontainer">
+        <Link onClick={handleClicker} className="linkBtn" to={!lcc ? "/login" : ""}>Login</Link>
+      </section>
+    </div>
+  )
+}
