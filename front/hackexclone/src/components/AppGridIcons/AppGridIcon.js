@@ -2,9 +2,9 @@ import React from 'react'
 
 export const AppGridIcon = (props) => {
   return (
-    <div className="AppGrid__icon__container">
+    <button className="AppGrid__icon__container" onClick={props.clicke}>
       {props.icon}
       <span className="AppGrid__icon__text">{props.iconName}</span>
-    </div>
+    </button>
   )
 }

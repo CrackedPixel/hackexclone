@@ -1,9 +1,47 @@
 .bg-dashboard {
   background: $green;
+  justify-content: unset;
   padding-top: 1.5rem;
 
-  h1 {
-    font-size: 15vw;
-    color: $secondary;
+  .dashboard__top {
+    display: flex;
+    h1 {
+      font-size: 15vw;
+      color: $secondary;
+    }
   }
+
+  .dashboard__appgrid {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    margin: auto;
+    padding-bottom: 10vw;
+
+    .AppGrid__icon__container {
+      display: flex;
+      flex-flow: column nowrap;
+      align-items: center;
+      background: $transparent;
+      border: 0;
+      width: 35%;
+      margin: 0 3vw;
+      // height: auto;
+      // margin: 1rem;
+
+      .AppGrid__icon__icon {
+        font-size: calc((20vw + 20vh)/2);
+        border: 1px solid $black;
+        padding: 3vw;
+        margin: 1rem 1rem 0 1rem;
+      }
+
+      .AppGrid__icon__text {
+        font-size: 5vw;
+        text-transform: capitalize;
+        color: $secondary;
+      }
+    }
+  }
+
 }

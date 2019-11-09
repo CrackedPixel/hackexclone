@@ -283,11 +283,65 @@ body {
 
 .bg-dashboard {
   background: green;
+  -webkit-box-pack: unset;
+      -ms-flex-pack: unset;
+          justify-content: unset;
   padding-top: 1.5rem;
 }
 
-.bg-dashboard h1 {
+.bg-dashboard .dashboard__top {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.bg-dashboard .dashboard__top h1 {
   font-size: 15vw;
+  color: #E2E8E7;
+}
+
+.bg-dashboard .dashboard__appgrid {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: auto;
+  padding-bottom: 10vw;
+}
+
+.bg-dashboard .dashboard__appgrid .AppGrid__icon__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background: transparent;
+  border: 0;
+  width: 35%;
+  margin: 0 3vw;
+}
+
+.bg-dashboard .dashboard__appgrid .AppGrid__icon__container .AppGrid__icon__icon {
+  font-size: calc((20vw + 20vh)/2);
+  border: 1px solid black;
+  padding: 3vw;
+  margin: 1rem 1rem 0 1rem;
+}
+
+.bg-dashboard .dashboard__appgrid .AppGrid__icon__container .AppGrid__icon__text {
+  font-size: 5vw;
+  text-transform: capitalize;
   color: #E2E8E7;
 }
 /*# sourceMappingURL=main.css.map */
