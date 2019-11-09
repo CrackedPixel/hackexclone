@@ -33,3 +33,24 @@
   left: 101vw;
   transition: all 500ms;
 }
+
+.overlay__fader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  background: $black;
+  transition: all 1000ms ease-in-out;
+
+  &.zero-opacity {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &.one-opacity {
+    opacity: 1;
+    pointer-events: unset;
+  }
+}

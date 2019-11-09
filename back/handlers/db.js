@@ -10,10 +10,10 @@ const mysql = require('mysql');
 
 
 const db_conn = mysql.createPool({
-  host: "sql9.freemysqlhosting.net",
-  user: "sql9309836",
-  password: "QrAfCdC9xl",
-  database: "sql9309836"
+  host: "192.168.1.19",
+  user: "hackexcloner",
+  password: "appgame",
+  database: "hackex"
 });
 
 const querySQL = (req, cb) => {
@@ -21,18 +21,19 @@ const querySQL = (req, cb) => {
   console.log("SQL", req);
   db_conn.getConnection( (err, conn) => {
     if (err) {
-      return res.send({
+      console.error("DB-ERR:", err);
+      return cb({
         code: 1,
         error: err.message
-      }).end();
+      });
     }
     db_conn.query(req, (erro, result, fields) => {
       conn.release();
       if (erro) {
-        return res.send({
+        return cb({
           code: 1,
           error: erro.message
-        }).end();
+        });
       }
       res.matches = result.length;
       res.data = result;

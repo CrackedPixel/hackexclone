@@ -6,9 +6,11 @@ import './css/main.css';
 import { Homepage } from './components/Homepage';
 import { LoginPage } from './components/LoginPage';
 import { RegisterPage } from './components/RegisterPage';
+import { Dashboard } from './components/Dashboard';
 
 function App(props) {
   const [isChangingLogin, setIsChangingLogin] = useState(false);
+  const [userInfo, setUserInfo] = useState({});
   const [canClick, setCanClick] = useState(true);
 
   const clickTimer = () => {
@@ -22,10 +24,10 @@ function App(props) {
     "isChangingLogin": isChangingLogin,
     "setIsChangingLogin": setIsChangingLogin,
     "canClick": canClick,
-    "setCanClick": clickTimer
+    "setCanClick": clickTimer,
+    "userInfo": userInfo,
+    "setUserInfo": setUserInfo
   }
-
-
   
   return (
     <div className="App">
@@ -40,8 +42,9 @@ function App(props) {
             <Switch location={location}>
               
                 <Route exact path="/" render={(props) => <Homepage {...props} propStateData={stateData}/>} />
-                <Route path="/login" render={(props) => <LoginPage {...props} propStateData={stateData}/>} />
-                <Route path="/register"  render={(props) => <RegisterPage {...props} propStateData={stateData}/>} />
+                <Route exact path="/login" render={(props) => <LoginPage {...props} propStateData={stateData}/>} />
+                <Route exact path="/register"  render={(props) => <RegisterPage {...props} propStateData={stateData}/>} />
+                <Route exact path="/dashboard"  render={(props) => <Dashboard {...props} propStateData={stateData}/>} />
               
             </Switch>
           </CSSTransition>

@@ -12,9 +12,12 @@ const sha1 = require('js-sha1');
 export const RegisterPage = (props) => {
   const [lcc, slcc] = useState(false);
   const [submiting, setSubmiting] = useState(false);
+  const [errorTitle, setErrorTitle] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
+  const [popupClass, setPopupClass] = useState("overlay__error");
   
   const handleClicker = e => {
-    if (lcc) {
+    if (lcc || errorMsg) {
       e.preventDefault();
       return; 
     }
@@ -27,8 +30,20 @@ export const RegisterPage = (props) => {
     }
   }
 
+  const closeDialogue = e => {
+    console.log("Closed");
+    setPopupClass("overlay__error shrink");
+    setTimeout(() => {
+      setErrorMsg("");
+      setPopupClass("overlay__error");
+    }, 501)
+  }
+
   const handle_submit = (values) => {
     // let encPW = sha1(e.passwd);
+    if (lcc || errorMsg) {
+      return;
+    }
     if (props.propStateData.canClick){
       props.propStateData.setCanClick();
       setSubmiting(true);
@@ -41,12 +56,15 @@ export const RegisterPage = (props) => {
       .post("/register", sendData)
       .then( res => {
         setTimeout(() => {
+          console.log(res.data);
           setSubmiting(false);
-        }, 1500)
+          if (res.data.message){
+            setErrorTitle(res.data.title);
+            setErrorMsg(res.data.message);
+          }
+        }, 1000)
       })
     }
-    
-   
   }
 
   const validate_register = Yup.object().shape({
@@ -66,22 +84,34 @@ export const RegisterPage = (props) => {
       .oneOf([Yup.ref('passwd'), null], "Passwords don't match")
   });
 
+  let showEM = errorMsg.split('\n').map((item, i) => {
+    return <span key={i}>{item}</span>
+  });
+
   return (
     <div className="appPage bg-register">
       <section className="register__title">
         <h1>Register</h1>
       </section>
       <section className="register__form">
+        {
+          (errorMsg === "") ? ( null ) : ( 
+            <div className={popupClass}>
+              <h3>{errorTitle}</h3>
+              {showEM}              
+              <button onClick={closeDialogue}>ok</button>
+            </div>
+          )
+        }
         <Formik
         initialValues= {{
-          email: '',
-          username: '',
-          passwd: '',
-          passwdv: ''
+          email: 'asd@asd.com',
+          username: 'asd',
+          passwd: 'asd',
+          passwdv: 'asd'
         }}
         onSubmit={handle_submit}
         validationSchema={validate_register}
-        isSubmitting={false}
         >
           {formikProps => (
         // render={({errors, status, isSubmitting}) => (

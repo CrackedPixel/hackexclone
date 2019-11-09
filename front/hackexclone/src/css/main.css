@@ -10,6 +10,74 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+.bg-home, .bg-login, .bg-register {
+  background: radial-gradient(#3A4E66, #313C4E, #313C4E);
+}
+
+.flip-x {
+  -webkit-transform: scaleX(-1);
+          transform: scaleX(-1);
+}
+
+.error.error-message {
+  color: red;
+  padding: 0.1rem 0 0.5rem 0;
+  width: 100%;
+}
+
+.overlay__error {
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 90%;
+  background: #E2E8E7;
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.overlay__error h3 {
+  text-transform: capitalize;
+  font-size: 1.5rem;
+}
+
+.overlay__error span {
+  text-transform: capitalize;
+  color: red !important;
+  padding: 0;
+  margin: 0;
+}
+
+.overlay__error span:first-of-type {
+  padding-top: 0.5rem;
+}
+
+.overlay__error span:last-of-type {
+  padding-bottom: 1.5rem;
+}
+
+.overlay__error button {
+  text-transform: uppercase;
+  font-size: 1rem;
+  width: 3rem;
+  border: 0;
+  background: transparent;
+}
+
+.overlay__error.shrink {
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  -webkit-transition: 0.5s all ease-in-out;
+  transition: 0.5s all ease-in-out;
+}
+
 .alwaysBack {
   opacity: 1 !important;
   -webkit-transition: none !important;
@@ -39,6 +107,28 @@ body {
   transition: all 500ms;
 }
 
+.overlay__fader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  background: black;
+  -webkit-transition: all 1000ms ease-in-out;
+  transition: all 1000ms ease-in-out;
+}
+
+.overlay__fader.zero-opacity {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay__fader.one-opacity {
+  opacity: 1;
+  pointer-events: unset;
+}
+
 .appPage {
   position: absolute;
   display: -webkit-box;
@@ -56,15 +146,6 @@ body {
           flex-flow: column nowrap;
   width: 100%;
   height: 100%;
-}
-
-.bg-home, .bg-login, .bg-register {
-  background: radial-gradient(#3A4E66, #313C4E, #313C4E);
-}
-
-.flip-x {
-  -webkit-transform: scaleX(-1);
-          transform: scaleX(-1);
 }
 
 .home__title {
@@ -86,12 +167,6 @@ body {
   text-decoration: none;
   background: #E2E8E7;
   padding: 0.6rem 2.5rem;
-}
-
-.error.error-message {
-  color: red;
-  padding: 0.1rem 0 0.5rem 0;
-  width: 100%;
 }
 
 .login__infobox {
@@ -126,10 +201,14 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-flow: column nowrap;
           flex-flow: column nowrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   width: 100%;
 }
 
 .login__form .formik__form--container .formik__form--field, .register__form .formik__form--container .formik__form--field {
+  width: 100%;
   height: 2rem;
   padding: 0 0.5rem;
   background: transparent;
@@ -200,5 +279,15 @@ body {
   font-size: 6vw;
   text-decoration: none;
   color: #A3E134;
+}
+
+.bg-dashboard {
+  background: green;
+  padding-top: 1.5rem;
+}
+
+.bg-dashboard h1 {
+  font-size: 15vw;
+  color: #E2E8E7;
 }
 /*# sourceMappingURL=main.css.map */

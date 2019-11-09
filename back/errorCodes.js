@@ -1,18 +1,22 @@
 const error_codes = {
-  none: 0,
-  existing_user_student: 1,
-  db_insert_update: 2,
-  no_access: 3,
-  not_logged_in: 4,
-  missing_data: 5,
-  invalid_username_password: 6,
-  labels: {
-    invalid_username_password: "Invalid username or password.",
-    missing_data: "Missing data.",
-    no_access: "Unauthorized access.",
-    not_logged_in: "Unauthorized access.",
-    existing_user_student: "A user with that information already exists.",
-    db_insert_update: "There was a problem performing the request."
+  existing_account: {
+    title: "error",
+    message: "username already exists",
+    code: 1
+  },
+  db_insert_update : {
+    title: "error",
+    message: "error connecting to the database.\nplease try again",
+    code: 1
+  },
+  created_account: {
+    title: "success",
+    message: "successfully created account.\nyou can now login"
+  },
+  invalid_login: {
+    title: "error",
+    message: "username or password incorrect",
+    code: 1
   }
 };
 

@@ -25,6 +25,7 @@ app.get(`${PF}`, (req, res) => {
 })
 app.post(`${PF}refresh`, token_master.token_refresh);
 app.post(`${PF}register`, account.create_account);
+app.post(`${PF}login`, account.verify_login);
 // app.post(`${PF}organization/list`, organization.list_all);
 // app.post(`${PF}organization/info`, organization.org_check);
 // app.post(`${PF}organization/adduser`, organization.addUser);
