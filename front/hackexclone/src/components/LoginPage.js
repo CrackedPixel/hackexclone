@@ -2,11 +2,12 @@ import React, {useState, useEffect } from 'react'
 import {Link, Redirect } from 'react-router-dom';
 
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+// import { Formik, Form, Field, ErrorMessage } from 'formik';
 import axiosWithAuth from "../utils/axiosWithAuth";
 import * as Yup from 'yup';
 
-import CircularProgress from '@material-ui/core/CircularProgress';
+// import CircularProgress from '@material-ui/core/CircularProgress';
+import { ValidatedForm } from './misc/ValidatedForm';
 
 const sha1 = require('js-sha1');  
 
@@ -59,7 +60,6 @@ export const LoginPage = (props) => {
 
   
   const handle_submit = (values) => {
-    // let encPW = sha1(e.passwd);
     if (lcc || errorMsg) {
       return;
     }
@@ -103,11 +103,16 @@ export const LoginPage = (props) => {
       .min(3, "Too short")
       .max(20, "Too long")
   });
-
-  let showEM = errorMsg.split('\n').map((item, i) => {
-    return <span key={i}>{item}</span>
-  });
-
+  
+  let eO = {
+    "popupClass": popupClass,
+    "closeDialogue": closeDialogue,
+    "errorTitle": errorTitle,
+    "errorMsg": errorMsg,
+    "showEM": errorMsg.split('\n').map((item, i) => {
+      return <span key={i}>{item}</span>
+    })
+  }
 
   return (
        isLoginOk ? ( <Redirect to="/dashboard"/> ) : (
@@ -117,51 +122,31 @@ export const LoginPage = (props) => {
           <h1>Login</h1>
         </section>
         <section className="login__form">
-        {
-            (errorMsg === "") ? ( null ) : ( 
-              <div className={popupClass}>
-                <h3>{errorTitle}</h3>
-                {showEM}              
-                <button onClick={closeDialogue}>ok</button>
-              </div>
-            )
-          }
-          <Formik
-          initialValues= {{
-            username: 'asd',
-            passwd: 'asd'
-          }}
-          onSubmit={handle_submit}
-          validationSchema={validate_login}
-          >
-            {
-              formikProps => (
-                <Form className="formik__form--container">
-                  <Field className="formik__form--field" 
-                    value={formikProps.values.username} 
-                    onChange={formikProps.handleChange}
-                    type="text" 
-                    name="username" 
-                    placeholder="username" 
-                  />
-                  <ErrorMessage name="username" component="div" className="error error-message"/>
-                  <Field className="formik__form--field" 
-                    value={formikProps.values.passwd} 
-                    onChange={formikProps.handleChange}
-                    type="password" 
-                    name="passwd" 
-                    placeholder="password" 
-                  />
-                  <ErrorMessage name="passwd" component="div" className="error error-message"/>
-                  <button type="submit" disabled={submiting}>Login</button>
-                  {
-                    submiting ? ( <CircularProgress className="loadingProgress" /> ) : ( null )
-                  }
-                </Form>
-              )
-            }
-          </Formik>
-          <span>No account? <Link className="linkBtn" onClick={changeTab(true)} to="/register">Register</Link> now</span>
+          <ValidatedForm 
+            validate_formik_form={validate_login} 
+            handle_submit={handle_submit}
+            fields={[
+                {
+                  "fieldtype": "username",
+                  "fieldname": "username",
+                  "fieldplaceholder": "username"
+                },
+                {
+                  "fieldtype": "password",
+                  "fieldname": "passwd",
+                  "fieldplaceholder": "password"
+                }
+              ]}
+            initValues={{
+              username: 'asd',
+              passwd: 'asd'
+            }}
+            eO={eO}
+            submiting={submiting}
+            buttonLabel="login"
+            belowBtn={(<span>No account? <Link className="linkBtn" onClick={changeTab(true)} to="/register">Register</Link> now</span>)}
+          />
+          
         </section>
         <section className="login__footer">
           <Link className="linkBtn" onClick={changeTab(false)} to="/"><ExitToAppIcon className="flip-x"/><span>Back</span></Link>

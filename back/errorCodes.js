@@ -4,6 +4,11 @@ const error_codes = {
     message: "username already exists",
     code: 1
   },
+  existing_email: {
+    title: "error",
+    message: "email already exists",
+    code: 1
+  },
   db_insert_update : {
     title: "error",
     message: "error connecting to the database.\nplease try again",

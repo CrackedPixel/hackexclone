@@ -1,11 +1,12 @@
 import React, {useState} from 'react'
 import {Link} from 'react-router-dom';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+// import { Formik, Form, Field, ErrorMessage } from 'formik';
 import axiosWithAuth from "../utils/axiosWithAuth";
 import * as Yup from 'yup';
 
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import CircularProgress from '@material-ui/core/CircularProgress';
+// import CircularProgress from '@material-ui/core/CircularProgress';
+import { ValidatedForm } from './misc/ValidatedForm';
 
 const sha1 = require('js-sha1');  
 
@@ -47,6 +48,7 @@ export const RegisterPage = (props) => {
     if (props.propStateData.canClick){
       props.propStateData.setCanClick();
       setSubmiting(true);
+      slcc(true);
       let sendData = {
         email: values.email,
         username: values.username,
@@ -58,6 +60,7 @@ export const RegisterPage = (props) => {
         setTimeout(() => {
           console.log(res.data);
           setSubmiting(false);
+          slcc(false);
           if (res.data.message){
             setErrorTitle(res.data.title);
             setErrorMsg(res.data.message);
@@ -80,13 +83,19 @@ export const RegisterPage = (props) => {
       .min(3, "Too short")
       .max(20, "Too long"),
     passwdv: Yup.string()
-      .required("Password V required")
-      .oneOf([Yup.ref('passwd'), null], "Passwords don't match")
+      .required("Passwords don't match")
+      .oneOf([Yup.ref('passwd')], "Passwords don't match")
   });
 
-  let showEM = errorMsg.split('\n').map((item, i) => {
-    return <span key={i}>{item}</span>
-  });
+  let eO = {
+    "popupClass": popupClass,
+    "closeDialogue": closeDialogue,
+    "errorTitle": errorTitle,
+    "errorMsg": errorMsg,
+    "showEM": errorMsg.split('\n').map((item, i) => {
+      return <span key={i}>{item}</span>
+    })
+  }
 
   return (
     <div className="appPage bg-register">
@@ -94,68 +103,41 @@ export const RegisterPage = (props) => {
         <h1>Register</h1>
       </section>
       <section className="register__form">
-        {
-          (errorMsg === "") ? ( null ) : ( 
-            <div className={popupClass}>
-              <h3>{errorTitle}</h3>
-              {showEM}              
-              <button onClick={closeDialogue}>ok</button>
-            </div>
-          )
-        }
-        <Formik
-        initialValues= {{
-          email: 'asd@asd.com',
-          username: 'asd',
-          passwd: 'asd',
-          passwdv: 'asd'
-        }}
-        onSubmit={handle_submit}
-        validationSchema={validate_register}
-        >
-          {formikProps => (
-        // render={({errors, status, isSubmitting}) => (
-          <Form className="formik__form--container" onSubmit={formikProps.handleSubmit}>  
-            <Field className="formik__form--field" 
-              value={formikProps.values.email} 
-              onChange={formikProps.handleChange}
-              type="email" 
-              name="email" 
-              placeholder="email address" 
-            />
-            <ErrorMessage name="email" component="div" className="error error-message"/>
-            <Field className="formik__form--field" 
-              value={formikProps.values.username} 
-              onChange={formikProps.handleChange}
-              type="text" 
-              name="username" 
-              placeholder="username" 
-            />
-            <ErrorMessage name="username" component="div" className="error error-message"/>
-            <Field className="formik__form--field" 
-              value={formikProps.values.passwd} 
-              onChange={formikProps.handleChange}
-              type="password" 
-              name="passwd" 
-              placeholder="password" 
-            />
-            <ErrorMessage name="passwd" component="div" className="error error-message"/>
-            <Field className="formik__form--field" 
-              value={formikProps.values.passwdv} 
-              onChange={formikProps.handleChange}
-              type="password" 
-              name="passwdv" 
-              placeholder="verify password" 
-            />
-            <ErrorMessage name="passwdv" component="div" className="error error-message"/>
-            <button type="submit" disabled={submiting}>Register</button>
-            {
-              submiting ? ( <CircularProgress className="loadingProgress" /> ) : ( null )
-            }
-            
-          </Form>
-        )}
-        </Formik>
+        <ValidatedForm 
+          validate_formik_form={validate_register} 
+          handle_submit={handle_submit}
+          fields={[
+              {
+                "fieldtype": "email",
+                "fieldname": "email",
+                "fieldplaceholder": "email address"
+              },
+              {
+                "fieldtype": "username",
+                "fieldname": "username",
+                "fieldplaceholder": "username"
+              },
+              {
+                "fieldtype": "password",
+                "fieldname": "passwd",
+                "fieldplaceholder": "password"
+              },
+              {
+                "fieldtype": "password",
+                "fieldname": "passwdv",
+                "fieldplaceholder": "verify password"
+              }
+            ]}
+          initValues={{
+            email: 'asd@asd.com',
+            username: 'asd',
+            passwd: 'asd',
+            passwdv: 'asd'
+          }}
+          eO={eO}
+          submiting={submiting}
+          buttonLabel="register"
+        />
       </section>
       <section className="register__footer">
       <Link className="linkBtn" onClick={handleClicker} to="/login"><ExitToAppIcon className="flip-x"/><span>Back</span></Link>

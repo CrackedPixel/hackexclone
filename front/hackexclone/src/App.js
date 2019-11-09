@@ -7,9 +7,11 @@ import { Homepage } from './components/Homepage';
 import { LoginPage } from './components/LoginPage';
 import { RegisterPage } from './components/RegisterPage';
 import { Dashboard } from './components/Dashboard';
+import { MyDevice } from './components/Apps/MyDevice';
 
 function App(props) {
   const [isChangingLogin, setIsChangingLogin] = useState(false);
+  const [didFadeDashboard, setDidChangeDashboard] = useState(false);
   const [userInfo, setUserInfo] = useState({});
   const [canClick, setCanClick] = useState(true);
 
@@ -26,7 +28,9 @@ function App(props) {
     "canClick": canClick,
     "setCanClick": clickTimer,
     "userInfo": userInfo,
-    "setUserInfo": setUserInfo
+    "setUserInfo": setUserInfo,
+    "didFadeDashboard": didFadeDashboard,
+    "setDidChangeDashboard": setDidChangeDashboard
   }
   
   return (
@@ -45,6 +49,8 @@ function App(props) {
                 <Route exact path="/login" render={(props) => <LoginPage {...props} propStateData={stateData}/>} />
                 <Route exact path="/register"  render={(props) => <RegisterPage {...props} propStateData={stateData}/>} />
                 <Route exact path="/dashboard"  render={(props) => <Dashboard {...props} propStateData={stateData}/>} />
+
+                <Route exact path="/mydevice"  render={(props) => <MyDevice {...props} propStateData={stateData}/>} />
               
             </Switch>
           </CSSTransition>
