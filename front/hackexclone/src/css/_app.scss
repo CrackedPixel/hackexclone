@@ -1,11 +1,7 @@
 .appPage {
   position: absolute;
-  display: flex;
+  @include displayFlex();
   align-items: center;
-  // justify-content: space-between;
-  flex-flow: column nowrap;
-  width: 100%;
-  height: 100%;
 }
 
 .home__title {
@@ -18,8 +14,7 @@
 }
 
 .home__logincontainer {
-  margin-bottom: 5rem;
-  margin-top: auto;
+  margin: auto 0 5rem 0;
 
   .linkBtn {
     color: $black;
@@ -30,7 +25,7 @@
   }
 }
 
-.login__infobox {
+.login__infobox, .register__title {
   padding-top: 1.5rem;
 
   h1 {
@@ -40,42 +35,26 @@
 }
 
 .login__form, .register__form {
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
-  width: 100%;
-  padding: 0 2rem;
-
-  margin-top: auto;
+  @include displayFlex(column nowrap, 100%, unset, 0 2rem, auto 0 0 0, center);
 
   .formik__form--container {
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: center;
-    width: 100%;
+    @include displayFlex(column nowrap, 100%, 100%, 0, 0, center);
 
     .formik__form--field {
-      width: 100%;
-      height: 2rem;
-      padding: 0 0.5rem;
+      @include sizeBox(100%, unset, 0 0.5rem, 0);
       background: $transparent;
       border: 1px solid darken($secondary, 60%);
       color: $secondary;
     }
 
     .loadingProgress {
-      margin-top: 1rem;
-      width: 40px;
-      height: 40px;
-      display: flex;
+      @include sizeBox(40px, 40px, 0, 1rem 0 0 0);
     }
 
     button {
+      @include sizeBox(100%, 2rem, 0, 0.5rem 0 0 0);
       text-transform: capitalize;
-      height: 2rem;
       font-size: 1.2rem;
-      margin-top: 0.5rem;
-      width: 100%;
       background: linear-gradient(to bottom, $btn-top, $btn-bottom);
     }
   }
@@ -92,46 +71,7 @@
   }
 }
 
-.login__footer {
-  margin-bottom: 1.5rem;
-  margin-top: auto;
-  .linkBtn {
-    display: flex;
-    align-items: center;
-    font-size: 6vw;
-    text-decoration: none;
-    color: $primary;
-  }
-}
-
-.register__title {
-  padding-top: 1.5rem;
-
-  h1 {
-    font-size: 15vw;
-    color: $secondary;
-  }
-}
-
-.register__form {
-   
-   
-}
-
-.register__footer {
-  margin-bottom: 1.5rem;
-  margin-top: auto;
-
-  .linkBtn {
-    display: flex;
-    align-items: center;
-    font-size: 6vw;
-    text-decoration: none;
-    color: $primary;
-  }
-}
-
-
-.bg-mydevice {
-  background: $red;
+.login__footer, .register__footer {
+  @include footerSection;
+  @include footerLinkBtn;
 }

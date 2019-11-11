@@ -19,7 +19,7 @@ export const Dashboard = (props) => {
     }, 100)
   }
 
-  const handle_click = (id) => e => {
+  const handle_click = e => {
     if (lcc) {
       e.preventDefault();
       return; 
@@ -34,35 +34,34 @@ export const Dashboard = (props) => {
       e.preventDefault();
       return;
     }
-    console.log("Clicked button ID", id);
-    switch(id){
-      case 1:  //Processes
+    // console.log("Clicked button ID", id);
+    // switch(id){
+    //   case 1:  //Processes
 
-      break;
-      case 2:  // Scan
+    //   break;
+    //   case 2:  // Scan
 
-      break;
-      case 3:  // Bank
+    //   break;
+    //   case 3:  // Bank
 
-      break;
-      case 4:  // Store
+    //   break;
+    //   case 4:  // Store
 
-      break;
-      case 5:  // Mail
+    //   break;
+    //   case 5:  // Mail
 
-      break;
-      case 6:  // Log
+    //   break;
+    //   case 6:  // Log
 
-      break;
-      case 7:  // Apps
+    //   break;
+    //   case 7:  // Apps
 
-      break;
-      case 8:  // Device
+    //   break;
+    //   case 8:  // Device
 
-      break;
-      default: 
-
-    }
+    //   break;
+    //   default: 
+    // }
   }
 
   const tUserInfo = props.propStateData.userInfo;
@@ -79,14 +78,14 @@ export const Dashboard = (props) => {
         }
       </section>
       <section className="dashboard__appgrid">
-        <AppGridIcon dest="/" clicke={handle_click(1)} icon={<ListIcon className="AppGrid__icon__icon" />} iconName="processes"/>
-        <AppGridIcon dest="/" clicke={handle_click(2)} icon={<TrackChangesIcon className="AppGrid__icon__icon" />} iconName="scan" />
-        <AppGridIcon dest="/" clicke={handle_click(3)} icon={<AccountBalanceIcon className="AppGrid__icon__icon" />} iconName="bank account" />
-        <AppGridIcon dest="/" clicke={handle_click(4)} icon={<ShoppingCartIcon className="AppGrid__icon__icon" />} iconName="store" />
-        <AppGridIcon dest="/" clicke={handle_click(5)} icon={<ForumIcon className="AppGrid__icon__icon" />} iconName="messages" />
-        <AppGridIcon dest="/" clicke={handle_click(6)} icon={<LaptopIcon className="AppGrid__icon__icon" />} iconName="log" />
-        <AppGridIcon dest="/" clicke={handle_click(7)} icon={<AppsIcon className="AppGrid__icon__icon" />} iconName="apps" />
-        <AppGridIcon dest="/mydevice" clicke={handle_click(8)} icon={<PhoneIphoneIcon className="AppGrid__icon__icon" />} iconName="my device" />
+        <AppGridIcon dest="/" clicke={handle_click} icon={<ListIcon className="AppGrid__icon__icon" />} iconName="processes"/>
+        <AppGridIcon dest="/" clicke={handle_click} icon={<TrackChangesIcon className="AppGrid__icon__icon" />} iconName="scan" />
+        <AppGridIcon dest="/" clicke={handle_click} icon={<AccountBalanceIcon className="AppGrid__icon__icon" />} iconName="bank account" />
+        <AppGridIcon dest="/" clicke={handle_click} icon={<ShoppingCartIcon className="AppGrid__icon__icon" />} iconName="store" />
+        <AppGridIcon dest="/" clicke={handle_click} icon={<ForumIcon className="AppGrid__icon__icon" />} iconName="messages" />
+        <AppGridIcon dest="/" clicke={handle_click} icon={<LaptopIcon className="AppGrid__icon__icon" />} iconName="log" />
+        <AppGridIcon dest="/" clicke={handle_click} icon={<AppsIcon className="AppGrid__icon__icon" />} iconName="apps" />
+        <AppGridIcon dest="/mydevice" clicke={handle_click} icon={<PhoneIphoneIcon className="AppGrid__icon__icon" />} iconName="my device" />
       </section>
     </div>
   )

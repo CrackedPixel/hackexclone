@@ -1,0 +1,8 @@
+.bg-mydevice {
+  background: red;
+  
+  .mydevice__footer {
+    @include footerSection;
+    @include footerLinkBtn;
+  }
+}

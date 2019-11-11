@@ -136,15 +136,20 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-flow: column nowrap;
           flex-flow: column nowrap;
+  -webkit-box-align: unset;
+      -ms-flex-align: unset;
+          align-items: unset;
   width: 100%;
   height: 100%;
+  padding: 0;
+  margin: 0;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .home__title {
@@ -157,8 +162,7 @@ body {
 }
 
 .home__logincontainer {
-  margin-bottom: 5rem;
-  margin-top: auto;
+  margin: auto 0 5rem 0;
 }
 
 .home__logincontainer .linkBtn {
@@ -169,11 +173,11 @@ body {
   padding: 0.6rem 2.5rem;
 }
 
-.login__infobox {
+.login__infobox, .register__title {
   padding-top: 1.5rem;
 }
 
-.login__infobox h1 {
+.login__infobox h1, .register__title h1 {
   font-size: 15vw;
   color: #E2E8E7;
 }
@@ -190,8 +194,9 @@ body {
       -ms-flex-align: center;
           align-items: center;
   width: 100%;
+  height: unset;
   padding: 0 2rem;
-  margin-top: auto;
+  margin: auto 0 0 0;
 }
 
 .login__form .formik__form--container, .register__form .formik__form--container {
@@ -206,32 +211,35 @@ body {
       -ms-flex-align: center;
           align-items: center;
   width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
 }
 
 .login__form .formik__form--container .formik__form--field, .register__form .formik__form--container .formik__form--field {
   width: 100%;
-  height: 2rem;
+  height: unset;
   padding: 0 0.5rem;
+  margin: 0;
   background: transparent;
   border: 1px solid #435552;
   color: #E2E8E7;
 }
 
 .login__form .formik__form--container .loadingProgress, .register__form .formik__form--container .loadingProgress {
-  margin-top: 1rem;
   width: 40px;
   height: 40px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  padding: 0;
+  margin: 1rem 0 0 0;
 }
 
 .login__form .formik__form--container button, .register__form .formik__form--container button {
-  text-transform: capitalize;
-  height: 2rem;
-  font-size: 1.2rem;
-  margin-top: 0.5rem;
   width: 100%;
+  height: 2rem;
+  padding: 0;
+  margin: 0.5rem 0 0 0;
+  text-transform: capitalize;
+  font-size: 1.2rem;
   background: -webkit-gradient(linear, left top, left bottom, from(#E4E4E4), to(#A1A0A3));
   background: linear-gradient(to bottom, #E4E4E4, #A1A0A3);
 }
@@ -247,12 +255,12 @@ body {
   color: #A3E134;
 }
 
-.login__footer {
+.login__footer, .register__footer {
   margin-bottom: 1.5rem;
   margin-top: auto;
 }
 
-.login__footer .linkBtn {
+.login__footer .linkBtn, .register__footer .linkBtn {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -262,42 +270,14 @@ body {
   font-size: 6vw;
   text-decoration: none;
   color: #A3E134;
-}
-
-.register__title {
-  padding-top: 1.5rem;
-}
-
-.register__title h1 {
-  font-size: 15vw;
-  color: #E2E8E7;
-}
-
-.register__footer {
-  margin-bottom: 1.5rem;
-  margin-top: auto;
-}
-
-.register__footer .linkBtn {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  font-size: 6vw;
-  text-decoration: none;
-  color: #A3E134;
-}
-
-.bg-mydevice {
-  background: red;
 }
 
 .bg-dashboard {
   background: radial-gradient(#3A4E66, #313C4E, #313C4E);
   width: 100%;
   height: 100%;
+  padding: 0;
+  margin: 0;
   -webkit-box-pack: unset;
       -ms-flex-pack: unset;
           justify-content: unset;
@@ -312,8 +292,13 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-flow: column nowrap;
           flex-flow: column nowrap;
-  padding-bottom: 0;
-  margin-bottom: 0;
+  -webkit-box-align: unset;
+      -ms-flex-align: unset;
+          align-items: unset;
+  width: unset;
+  height: unset;
+  padding: unset unset 0 unset;
+  margin: unset unset 0 unset;
 }
 
 .bg-dashboard .dashboard__top h1 {
@@ -339,11 +324,7 @@ body {
   color: #E2E8E7;
 }
 
-.bg-dashboard .dashboard__top .userinfo__container .userinfo__name {
-  color: #A3E134;
-}
-
-.bg-dashboard .dashboard__top .userinfo__container .userinfo__level {
+.bg-dashboard .dashboard__top .userinfo__container .userinfo__name, .bg-dashboard .dashboard__top .userinfo__container .userinfo__level {
   color: #A3E134;
 }
 
@@ -376,10 +357,12 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  width: 35%;
+  height: unset;
+  padding: 0;
+  margin: 2vw;
   background: transparent;
   border: 0;
-  width: 35%;
-  margin: 2vw;
   color: #A3E134;
   text-decoration: none;
 }
@@ -435,6 +418,7 @@ body {
 }
 
 .bg-dashboard .dashboard__appgrid .AppGrid__icon__container .AppGrid__icon__text {
+  text-align: center;
   text-transform: capitalize;
   color: #E2E8E7;
   font-size: 3vh;
@@ -444,5 +428,26 @@ body {
   .bg-dashboard .dashboard__appgrid .AppGrid__icon__container .AppGrid__icon__text {
     font-size: 3vw;
   }
+}
+
+.bg-mydevice {
+  background: red;
+}
+
+.bg-mydevice .mydevice__footer {
+  margin-bottom: 1.5rem;
+  margin-top: auto;
+}
+
+.bg-mydevice .mydevice__footer .linkBtn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 6vw;
+  text-decoration: none;
+  color: #A3E134;
 }
 /*# sourceMappingURL=main.css.map */
