@@ -30,6 +30,13 @@ export const LoginPage = (props) => {
     sfClass(tIC || props.propStateData.isChangingLogin ? staticPage : dynamicPage);
   }, [props.propStateData.isChangingLogin]);
   
+  
+  if (sessionStorage.getItem("userInfo")){
+    return (
+      <Redirect to="/dashboard" />
+    )
+  }
+
   const changeTab = (newValue) => e => {
     if (lcc || errorMsg) {
       e.preventDefault();
@@ -87,7 +94,7 @@ export const LoginPage = (props) => {
             setFaderClass(fadeoutStart);
             setTimeout(() => {
               setIsLoginOk(true); 
-            }, 1001)
+            }, 1)
           }
         }, 1000)
       })
@@ -150,7 +157,7 @@ export const LoginPage = (props) => {
           
         </section>
         <section className="login__footer">
-          <Link className="linkBtn" onClick={changeTab(false)} to="/"><ExitToAppIcon className="flip-x"/><span>Back</span></Link>
+          <Link className="linkBtn" onClick={changeTab(false)} to="/"><ExitToAppIcon className="back-icon flip-x"/><span>Back</span></Link>
         </section>
       </div>
        )

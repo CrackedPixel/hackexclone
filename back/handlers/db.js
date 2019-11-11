@@ -16,6 +16,41 @@ const db_conn = mysql.createPool({
   database: "hackex"
 });
 
+class C_QueryBuilder {
+  statement = "";
+  from = "";
+  where = "";
+  limit = "";
+  insert = [];
+  values = [];
+  constructor(props) {
+    if (props){
+      this.statement = props.statement;
+      this.from = props.from;
+      this.where = props.where;
+      this.limit = props.limit;
+      this.values = props.values;
+    }
+  }
+
+  Execute (cb) {
+    let nQuery = `${this.statement} FROM \`${this.from}\``;
+    if (this.insert.length > 0) {
+      nQuery += ` (${this.insert.map((item) => {
+        return `'${item}'`;
+      })})`;
+      nQuery += ` VALUES(${this.values.map((item) => {
+        return `'${item}'`;
+      })})`;
+    }
+    if (this.where) nQuery += ` WHERE ${this.where}`;
+    if (this.limit) nQuery += ` LIMIT ${this.limit}`;
+    nQuery += ";"
+    
+    querySQL(nQuery, cb);
+  }
+}
+
 const querySQL = (req, cb) => {
   let res = {};
   console.log("SQL", req);
@@ -44,4 +79,4 @@ const querySQL = (req, cb) => {
   
 }
 
-module.exports = {db_conn, querySQL};
+module.exports = {db_conn, querySQL, C_QueryBuilder};

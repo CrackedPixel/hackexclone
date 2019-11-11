@@ -5,12 +5,7 @@
 }
 
 .home__title {
-  padding-top: 1.5rem;
-
-  h1 {
-    font-size: 15vw;
-    color: $secondary;
-  }
+  @include titleSection();
 }
 
 .home__logincontainer {
@@ -26,35 +21,48 @@
 }
 
 .login__infobox, .register__title {
-  padding-top: 1.5rem;
-
-  h1 {
-    font-size: 15vw;
-    color: $secondary;
-  }
+  @include titleSection();
 }
 
 .login__form, .register__form {
   @include displayFlex(column nowrap, 100%, unset, 0 2rem, auto 0 0 0, center);
+  @media #{$landscape} {
+    margin-top: auto;
+    width: 50%;
+  }
 
   .formik__form--container {
     @include displayFlex(column nowrap, 100%, 100%, 0, 0, center);
 
     .formik__form--field {
-      @include sizeBox(100%, unset, 0 0.5rem, 0);
+      @include sizeBox(80vw, unset, 0 0.5rem, 0);
+      
+      font-size: 5vw;
+      @media #{$landscape} {
+        @include sizeBox(80vh, unset);
+        font-size: 5vh;
+      }
       background: $transparent;
       border: 1px solid darken($secondary, 60%);
       color: $secondary;
     }
 
     .loadingProgress {
-      @include sizeBox(40px, 40px, 0, 1rem 0 0 0);
+      @include sizeBox(15vw !important, 15vw !important, 0, 1rem 0 0 0);
+      @media #{$landscape} {
+        width: 15vh !important;
+        height: 15vh !important;
+      }
     }
 
     button {
-      @include sizeBox(100%, 2rem, 0, 0.5rem 0 0 0);
+      @include sizeBox(80vw, 12vw, 0, 0.5rem 0 0 0);
       text-transform: capitalize;
-      font-size: 1.2rem;
+      font-size: 8vw;
+      @media #{$landscape} {
+        @include sizeBox(80vh, 12vh, 0);
+        font-size: 8vh;
+      }
       background: linear-gradient(to bottom, $btn-top, $btn-bottom);
     }
   }
@@ -62,6 +70,9 @@
   span {
     margin-top: 0.3rem;
     font-size: 4vw;
+    @media #{$landscape} {
+      font-size: 4vh;
+    }
     color: $secondary;
 
     .linkBtn {

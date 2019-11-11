@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import {Redirect} from 'react-router-dom';
 import { AppGridIcon } from './misc/AppGridIcon';
 
 import ListIcon from '@material-ui/icons/List';
@@ -12,15 +13,25 @@ import PhoneIphoneIcon from '@material-ui/icons/PhoneIphone';
 
 export const Dashboard = (props) => {
   const [lcc, slcc] = useState(false);
+  const [lui, slui] = useState(false);
+  const [ff, sFF] = useState(false);
+
+  if (!sessionStorage.getItem("userInfo")){
+    return (
+      <Redirect to="/" />
+    )
+  }
 
   if (props.propStateData.didFadeDashboard !== true) {
     setTimeout(() => {
-      props.propStateData.setDidChangeDashboard(true);
+      props.propStateData.setDidFadeDashboard(true);
+      sFF(true);
     }, 100)
   }
 
   const handle_click = e => {
-    if (lcc) {
+    if (lcc || !ff) {
+      console.log("lcc, ff", lcc, ff);
       e.preventDefault();
       return; 
     }
@@ -34,34 +45,13 @@ export const Dashboard = (props) => {
       e.preventDefault();
       return;
     }
-    // console.log("Clicked button ID", id);
-    // switch(id){
-    //   case 1:  //Processes
+  }
 
-    //   break;
-    //   case 2:  // Scan
-
-    //   break;
-    //   case 3:  // Bank
-
-    //   break;
-    //   case 4:  // Store
-
-    //   break;
-    //   case 5:  // Mail
-
-    //   break;
-    //   case 6:  // Log
-
-    //   break;
-    //   case 7:  // Apps
-
-    //   break;
-    //   case 8:  // Device
-
-    //   break;
-    //   default: 
-    // }
+  if (!props.propStateData.userInfo.username && !lui) {
+    slui(true);
+    console.log("Set prop");
+    props.propStateData.setUserInfo(JSON.parse(sessionStorage.getItem('userInfo')));
+    console.log(JSON.parse(sessionStorage.getItem('userInfo')));
   }
 
   const tUserInfo = props.propStateData.userInfo;

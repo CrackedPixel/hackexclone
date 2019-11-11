@@ -3,6 +3,7 @@ const config = require('./config');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const DB = require('./handlers/db');
 // const handlers = require('./handlers/handlers');
 // const organization = require('./handlers/organization');
 const token_master = require('./handlers/token_master');
@@ -40,3 +41,24 @@ app.post(`${PF}login`, account.verify_login);
 app.listen(config.server_port, () => {
     console.log("Server running on port " + config.server_port);
 });
+
+// let newIP = "";
+// let nQuery = "INSERT IGNORE INTO `addresses` (address) VALUES ";
+// // for (let i = 0; i < 80000; ++i ) {
+//   newIP = `${(Math.floor(Math.random() * 255) + 1)}.${(Math.floor(Math.random() * 255))}.${(Math.floor(Math.random() * 255))}.${(Math.floor(Math.random() * 255))}`;
+
+//   nQuery += `('${newIP}'),`;
+//   // console.log(newIP);
+// // }
+
+// nQuery = nQuery.slice(0, -1) + ";";
+
+// DB.querySQL(nQuery, res => {
+//   if (res.code) {
+//     console.log("ERROR:", res.error);
+//   }else{
+//     console.log("Done");
+//   }
+// })
+
+// console.log(nQuery.slice(0, -1));

@@ -11,7 +11,7 @@ import { MyDevice } from './components/Apps/MyDevice';
 
 function App(props) {
   const [isChangingLogin, setIsChangingLogin] = useState(false);
-  const [didFadeDashboard, setDidChangeDashboard] = useState(false);
+  const [didFadeDashboard, setDidFadeDashboard] = useState(false);
   const [userInfo, setUserInfo] = useState({});
   const [canClick, setCanClick] = useState(true);
 
@@ -30,7 +30,7 @@ function App(props) {
     "userInfo": userInfo,
     "setUserInfo": setUserInfo,
     "didFadeDashboard": didFadeDashboard,
-    "setDidChangeDashboard": setDidChangeDashboard
+    "setDidFadeDashboard": setDidFadeDashboard
   }
   
   return (

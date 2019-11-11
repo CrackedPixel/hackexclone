@@ -5,6 +5,12 @@
   height: 100%;
 }
 
+.appPage.bg-login, .appPage.bg-register {
+  @media #{$landscape} {
+    flex-flow: row wrap;
+  }
+}
+
 .flip-x {
   transform: scaleX(-1);
 }
@@ -25,13 +31,25 @@
 
   background: $secondary;
   border-radius: 10px;
+  z-index: 1000;
 
   // padding-top: 1rem;
-  padding: 1rem;
+  // padding: 1rem;
+  padding: 5vw;
+  // top: 37vh;
+  @media #{$landscape} {
+    padding: 5vh;
+    align-self: flex-start;
+    left: 5%;
+  }
 
   h3 {
     text-transform: capitalize;
-    font-size: 1.5rem;
+    // font-size: 1.5rem;
+    font-size: 11vw;
+    @media #{$landscape} {
+      font-size: 11vh;
+    }
   }
 
   span {
@@ -41,19 +59,29 @@
     margin: 0;
 
     &:first-of-type {
-      padding-top: 0.5rem;
+      padding-top: 2vw;
+      @media #{$landscape} {
+        padding-top: 2vh;
+      }
     }
 
     &:last-of-type {
-      padding-bottom: 1.5rem;
+      padding-bottom: 5vw;
+      @media #{$landscape} {
+        padding-bottom: 5vh;
+      }
     }
     // padding-bottom: 1.5rem;
   }
 
   button {
     text-transform: uppercase;
-    font-size: 1rem;
-    width: 3rem;
+    // font-size: 1rem;
+    font-size: 6vw;
+    @media #{$landscape} {
+      font-size: 6vh;
+    }
+    // width: 3rem;
     border: 0;
     background: $transparent;
     // padding-bottom: 0.6rem;
@@ -81,9 +109,43 @@
   @include sizeBox($width, $height, $pad, $margin);
 }
 
+@mixin titleSection() {
+  display: flex;
+  padding-top: 5vh;
+  @media #{$landscape} {
+    padding: 0;
+    width: 100%;
+    justify-content: center;
+  }
+
+  h1 {
+    color: $secondary;
+    font-size: 13vw;
+    margin: 3vh 2vw 0 2vw;
+
+    @media #{$landscape} {
+      font-size: 13vh;
+      margin: 3vw 0 0 0;
+    }
+  }
+}
+
 @mixin footerSection() {
-  margin-bottom: 1.5rem;
+  margin-bottom: 5vh;
   margin-top: auto;
+  @media #{$landscape} {
+    display: flex;
+    margin: 0 15vh 15vh auto;
+    align-self: flex-end;
+  }
+  .back-icon { 
+    width: 8vw;
+    height: 8vw;
+    @media #{$landscape} {
+      width: 8vh;
+      height: 8vh;
+    }
+  }
 }
 
 @mixin footerLinkBtn() {

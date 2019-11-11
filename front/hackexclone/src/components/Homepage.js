@@ -1,8 +1,16 @@
 import React, {useState} from 'react'
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 
 export const Homepage = (props) => {
   const [lcc, slcc] = useState(false);
+
+  if (sessionStorage.getItem("userInfo")){
+    return (
+      <Redirect to="/dashboard" />
+    )
+  }else{
+    props.propStateData.setDidFadeDashboard(false);
+  }
 
   const handleClicker = e => {
     if (lcc) {

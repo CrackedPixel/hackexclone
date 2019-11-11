@@ -1,6 +1,17 @@
 .bg-mydevice {
   background: red;
-  
+
+  .mydevice__title {
+    display: flex;
+    align-self: flex-start;
+    margin: 1rem 0 0 1rem;
+    color: $secondary;
+  }
+
+  .mydevice__content {
+
+  }
+
   .mydevice__footer {
     @include footerSection;
     @include footerLinkBtn;

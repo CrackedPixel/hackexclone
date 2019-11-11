@@ -140,7 +140,7 @@ export const RegisterPage = (props) => {
         />
       </section>
       <section className="register__footer">
-      <Link className="linkBtn" onClick={handleClicker} to="/login"><ExitToAppIcon className="flip-x"/><span>Back</span></Link>
+      <Link className="linkBtn" onClick={handleClicker} to="/login"><ExitToAppIcon className="back-icon flip-x"/><span>Back</span></Link>
       </section>
     </div>
   )
