@@ -37,7 +37,6 @@ body {
 }
 
 .overlay__error {
-  position: absolute;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -49,10 +48,13 @@ body {
       -ms-flex-align: center;
           align-items: center;
   width: 90%;
-  background: #E2E8E7;
-  border-radius: 10px;
-  z-index: 1000;
+  height: unset;
   padding: 5vw;
+  margin: 0;
+  position: absolute;
+  background: #E2E8E7;
+  border-radius: 5vw;
+  z-index: 1000;
 }
 
 @media only screen and (orientation: landscape) {
@@ -194,7 +196,7 @@ body {
           align-items: center;
 }
 
-.home__title {
+.home__title, .login__infobox, .register__title {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -202,7 +204,7 @@ body {
 }
 
 @media only screen and (orientation: landscape) {
-  .home__title {
+  .home__title, .login__infobox, .register__title {
     padding: 0;
     width: 100%;
     -webkit-box-pack: center;
@@ -211,59 +213,55 @@ body {
   }
 }
 
-.home__title h1 {
+.home__title h1, .login__infobox h1, .register__title h1 {
   color: #E2E8E7;
   font-size: 13vw;
   margin: 3vh 2vw 0 2vw;
 }
 
 @media only screen and (orientation: landscape) {
-  .home__title h1 {
+  .home__title h1, .login__infobox h1, .register__title h1 {
     font-size: 13vh;
+  }
+}
+
+@media only screen and (orientation: landscape) {
+  .home__title h1, .login__infobox h1, .register__title h1 {
     margin: 3vw 0 0 0;
   }
 }
 
-.home__logincontainer {
-  margin: auto 0 5rem 0;
+.home__logincontainer, .login__footer, .register__footer {
+  margin-bottom: 5vh;
+  margin-top: auto;
 }
 
-.home__logincontainer .linkBtn {
-  color: black;
-  font-size: 11vw;
+@media only screen and (orientation: landscape) {
+  .home__logincontainer, .login__footer, .register__footer {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin: 0 15vh 26vh auto;
+    -ms-flex-item-align: end;
+        align-self: flex-end;
+  }
+}
+
+.home__logincontainer .back-icon, .login__footer .back-icon, .register__footer .back-icon {
+  width: 8vw;
+  height: 8vw;
+}
+
+.home__logincontainer .linkBtn, .login__footer .linkBtn, .register__footer .linkBtn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 6vw;
   text-decoration: none;
-  background: #E2E8E7;
-  padding: 0.6rem 2.5rem;
-}
-
-.login__infobox, .register__title {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  padding-top: 5vh;
-}
-
-@media only screen and (orientation: landscape) {
-  .login__infobox, .register__title {
-    padding: 0;
-    width: 100%;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-  }
-}
-
-.login__infobox h1, .register__title h1 {
-  color: #E2E8E7;
-  font-size: 13vw;
-  margin: 3vh 2vw 0 2vw;
-}
-
-@media only screen and (orientation: landscape) {
-  .login__infobox h1, .register__title h1 {
-    font-size: 13vh;
-    margin: 3vw 0 0 0;
-  }
+  color: #A3E134;
 }
 
 .login__form, .register__form {
@@ -279,7 +277,7 @@ body {
           align-items: center;
   width: 100%;
   height: unset;
-  padding: 0 2rem;
+  padding: 0;
   margin: auto 0 0 0;
 }
 
@@ -320,11 +318,16 @@ body {
 
 @media only screen and (orientation: landscape) {
   .login__form .formik__form--container .formik__form--field, .register__form .formik__form--container .formik__form--field {
+    font-size: 5vh;
+  }
+}
+
+@media only screen and (orientation: landscape) {
+  .login__form .formik__form--container .formik__form--field, .register__form .formik__form--container .formik__form--field {
     width: 80vh;
     height: unset;
     padding: 0;
     margin: 0;
-    font-size: 5vh;
   }
 }
 
@@ -332,13 +335,14 @@ body {
   width: 15vw !important;
   height: 15vw !important;
   padding: 0;
-  margin: 1rem 0 0 0;
+  margin: 5vh 0 5vh 0;
 }
 
 @media only screen and (orientation: landscape) {
   .login__form .formik__form--container .loadingProgress, .register__form .formik__form--container .loadingProgress {
     width: 15vh !important;
     height: 15vh !important;
+    margin: 5vh 0 5vh 0;
   }
 }
 
@@ -355,11 +359,16 @@ body {
 
 @media only screen and (orientation: landscape) {
   .login__form .formik__form--container button, .register__form .formik__form--container button {
+    font-size: 8vh;
+  }
+}
+
+@media only screen and (orientation: landscape) {
+  .login__form .formik__form--container button, .register__form .formik__form--container button {
     width: 80vh;
     height: 12vh;
     padding: 0;
     margin: 0;
-    font-size: 8vh;
   }
 }
 
@@ -376,46 +385,6 @@ body {
 }
 
 .login__form span .linkBtn, .register__form span .linkBtn {
-  text-decoration: none;
-  color: #A3E134;
-}
-
-.login__footer, .register__footer {
-  margin-bottom: 5vh;
-  margin-top: auto;
-}
-
-@media only screen and (orientation: landscape) {
-  .login__footer, .register__footer {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    margin: 0 15vh 15vh auto;
-    -ms-flex-item-align: end;
-        align-self: flex-end;
-  }
-}
-
-.login__footer .back-icon, .register__footer .back-icon {
-  width: 8vw;
-  height: 8vw;
-}
-
-@media only screen and (orientation: landscape) {
-  .login__footer .back-icon, .register__footer .back-icon {
-    width: 8vh;
-    height: 8vh;
-  }
-}
-
-.login__footer .linkBtn, .register__footer .linkBtn {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  font-size: 6vw;
   text-decoration: none;
   color: #A3E134;
 }
@@ -462,6 +431,11 @@ body {
 @media only screen and (orientation: landscape) {
   .bg-dashboard .dashboard__top h1 {
     font-size: 13vh;
+  }
+}
+
+@media only screen and (orientation: landscape) {
+  .bg-dashboard .dashboard__top h1 {
     margin: 3vw 0 0 0;
   }
 }
@@ -541,44 +515,60 @@ body {
 
 @media only screen and (orientation: portrait) {
   .bg-dashboard .dashboard__appgrid .AppGrid__icon__container:first-child .AppGrid__icon__icon {
-    border-top-left-radius: 20px;
+    border-top-left-radius: 2vh;
   }
   .bg-dashboard .dashboard__appgrid .AppGrid__icon__container:nth-child(2) .AppGrid__icon__icon {
-    border-top-right-radius: 20px;
+    border-top-right-radius: 2vh;
   }
   .bg-dashboard .dashboard__appgrid .AppGrid__icon__container:nth-child(7) .AppGrid__icon__icon {
-    border-bottom-left-radius: 20px;
+    border-bottom-left-radius: 2vh;
   }
   .bg-dashboard .dashboard__appgrid .AppGrid__icon__container:nth-child(8) .AppGrid__icon__icon {
-    border-bottom-right-radius: 20px;
+    border-bottom-right-radius: 2vh;
   }
 }
 
 @media only screen and (orientation: landscape) {
   .bg-dashboard .dashboard__appgrid .AppGrid__icon__container:first-child .AppGrid__icon__icon {
-    border-top-left-radius: 20px;
+    border-top-left-radius: 2vw;
   }
   .bg-dashboard .dashboard__appgrid .AppGrid__icon__container:nth-child(4) .AppGrid__icon__icon {
-    border-top-right-radius: 20px;
+    border-top-right-radius: 2vw;
   }
   .bg-dashboard .dashboard__appgrid .AppGrid__icon__container:nth-child(5) .AppGrid__icon__icon {
-    border-bottom-left-radius: 20px;
+    border-bottom-left-radius: 2vw;
   }
   .bg-dashboard .dashboard__appgrid .AppGrid__icon__container:nth-child(8) .AppGrid__icon__icon {
-    border-bottom-right-radius: 20px;
+    border-bottom-right-radius: 2vw;
   }
 }
 
 .bg-dashboard .dashboard__appgrid .AppGrid__icon__container .AppGrid__icon__icon {
   border: 1px solid black;
   font-size: 11vh;
-  margin: 0;
-  padding: 0.3rem;
 }
 
 @media only screen and (orientation: landscape) {
   .bg-dashboard .dashboard__appgrid .AppGrid__icon__container .AppGrid__icon__icon {
     font-size: 11vw;
+  }
+}
+
+@media only screen and (orientation: portrait) {
+  .bg-dashboard .dashboard__appgrid .AppGrid__icon__container .AppGrid__icon__icon {
+    width: 20vw;
+    height: 20vw;
+    padding: 1vw;
+    margin: 0;
+  }
+}
+
+@media only screen and (orientation: landscape) {
+  .bg-dashboard .dashboard__appgrid .AppGrid__icon__container .AppGrid__icon__icon {
+    width: 20vh;
+    height: 20vh;
+    padding: 1vh;
+    margin: 0;
   }
 }
 
@@ -619,7 +609,7 @@ body {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    margin: 0 15vh 15vh auto;
+    margin: 0 15vh 26vh auto;
     -ms-flex-item-align: end;
         align-self: flex-end;
   }
@@ -628,13 +618,6 @@ body {
 .bg-mydevice .mydevice__footer .back-icon {
   width: 8vw;
   height: 8vw;
-}
-
-@media only screen and (orientation: landscape) {
-  .bg-mydevice .mydevice__footer .back-icon {
-    width: 8vh;
-    height: 8vh;
-  }
 }
 
 .bg-mydevice .mydevice__footer .linkBtn {

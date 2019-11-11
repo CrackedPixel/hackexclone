@@ -19,6 +19,7 @@ const db_conn = mysql.createPool({
 class C_QueryBuilder {
   statement = "";
   from = "";
+  join = "";
   where = "";
   limit = "";
   insert = [];
@@ -29,20 +30,24 @@ class C_QueryBuilder {
       this.from = props.from;
       this.where = props.where;
       this.limit = props.limit;
+      this.insert = props.insert;
       this.values = props.values;
+      this.join = props.join;
     }
   }
 
   Execute (cb) {
-    let nQuery = `${this.statement} FROM \`${this.from}\``;
-    if (this.insert.length > 0) {
+    let nQuery = `${this.statement}`;
+    if (this.from) nQuery += ` FROM \`${this.from}\``;
+    if (this.insert) {
       nQuery += ` (${this.insert.map((item) => {
-        return `'${item}'`;
+        return `${item}`;
       })})`;
       nQuery += ` VALUES(${this.values.map((item) => {
         return `'${item}'`;
       })})`;
     }
+    if (this.join) nQuery += ` ${this.join}`;
     if (this.where) nQuery += ` WHERE ${this.where}`;
     if (this.limit) nQuery += ` LIMIT ${this.limit}`;
     nQuery += ";"
@@ -65,6 +70,7 @@ const querySQL = (req, cb) => {
     db_conn.query(req, (erro, result, fields) => {
       conn.release();
       if (erro) {
+        console.error("DB-ERR-2:", erro);
         return cb({
           code: 1,
           error: erro.message

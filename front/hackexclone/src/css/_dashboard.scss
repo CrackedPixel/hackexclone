@@ -5,7 +5,6 @@
   overflow: hidden;
 
   .dashboard__top {
-    // @include displayFlex(column nowrap, unset, unset, unset unset 0 unset, unset unset 0 unset, unset);
     @include titleSection();
     flex-flow: column nowrap;
 
@@ -52,25 +51,25 @@
       @media #{$portrait} {
         &:first-child {
           .AppGrid__icon__icon {
-            border-top-left-radius: 20px;
+            border-top-left-radius: 2vh;
           }
         }
 
         &:nth-child(2) {
           .AppGrid__icon__icon {
-            border-top-right-radius: 20px;
+            border-top-right-radius: 2vh;
           }
         }
 
         &:nth-child(7) {
           .AppGrid__icon__icon {
-            border-bottom-left-radius: 20px;
+            border-bottom-left-radius: 2vh;
           }
         }
 
         &:nth-child(8) {
           .AppGrid__icon__icon {
-            border-bottom-right-radius: 20px;
+            border-bottom-right-radius: 2vh;
           }
         }
       }
@@ -78,38 +77,35 @@
       @media #{$landscape} {
         &:first-child {
           .AppGrid__icon__icon {
-            border-top-left-radius: 20px;
+            border-top-left-radius: 2vw;
           }
         }
   
         &:nth-child(4) {
           .AppGrid__icon__icon {
-            border-top-right-radius: 20px;
+            border-top-right-radius: 2vw;
           }
         }
   
         &:nth-child(5) {
           .AppGrid__icon__icon {
-            border-bottom-left-radius: 20px;
+            border-bottom-left-radius: 2vw;
           }
         }
   
         &:nth-child(8) {
           .AppGrid__icon__icon {
-            border-bottom-right-radius: 20px;
+            border-bottom-right-radius: 2vw;
           }
         }
       }
 
       .AppGrid__icon__icon {
         border: 1px solid $black;
-        font-size: 11vh;
-        margin: 0;
-        padding: 0.3rem;
-
-        @media #{$landscape} {
-          font-size: 11vw;
-        }
+        @include scaleFont(11vh, 11vw);
+        @include sizeBoxScale(20vw, 20vh, 20vw, 20vh, 1vw, 1vh);
+        // margin: 0;
+        // padding: 0.3rem;
 
       }
 

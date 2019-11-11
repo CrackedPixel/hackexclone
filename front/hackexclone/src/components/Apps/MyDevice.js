@@ -25,7 +25,7 @@ export const MyDevice = () => {
       <Link to="/" onClick={handleLogout}>Logout</Link>
       </section>
       <section className="mydevice__footer">
-        <Link className="linkBtn" onClick={handleClicker} to="/dashboard"><ExitToAppIcon className="flip-x"/><span>Back</span></Link>
+        <Link className="linkBtn" onClick={handleClicker} to="/dashboard"><ExitToAppIcon className="back-icon flip-x"/><span>Back</span></Link>
       </section>
     </div>
   )

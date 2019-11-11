@@ -4,28 +4,16 @@
   align-items: center;
 }
 
-.home__title {
+.home__title, .login__infobox, .register__title {
   @include titleSection();
 }
 
-.home__logincontainer {
-  margin: auto 0 5rem 0;
-
-  .linkBtn {
-    color: $black;
-    font-size: 11vw;
-    text-decoration: none;
-    background: $secondary;
-    padding: 0.6rem 2.5rem;
-  }
-}
-
-.login__infobox, .register__title {
-  @include titleSection();
+.home__logincontainer, .login__footer, .register__footer {
+  @include footerSection;
 }
 
 .login__form, .register__form {
-  @include displayFlex(column nowrap, 100%, unset, 0 2rem, auto 0 0 0, center);
+  @include displayFlex(column nowrap, 100%, unset, 0, auto 0 0 0, center);
   @media #{$landscape} {
     margin-top: auto;
     width: 50%;
@@ -36,43 +24,42 @@
 
     .formik__form--field {
       @include sizeBox(80vw, unset, 0 0.5rem, 0);
+      @include scaleFont(5vw, 5vh);
       
-      font-size: 5vw;
       @media #{$landscape} {
         @include sizeBox(80vh, unset);
-        font-size: 5vh;
       }
+
       background: $transparent;
       border: 1px solid darken($secondary, 60%);
       color: $secondary;
     }
 
     .loadingProgress {
-      @include sizeBox(15vw !important, 15vw !important, 0, 1rem 0 0 0);
+      @include sizeBox(15vw !important, 15vw !important, 0, 5vh 0 5vh 0);
       @media #{$landscape} {
         width: 15vh !important;
         height: 15vh !important;
+        margin: 5vh 0 5vh 0;
       }
     }
 
     button {
       @include sizeBox(80vw, 12vw, 0, 0.5rem 0 0 0);
       text-transform: capitalize;
-      font-size: 8vw;
+      @include scaleFont(8vw, 8vh);
+      
       @media #{$landscape} {
         @include sizeBox(80vh, 12vh, 0);
-        font-size: 8vh;
       }
+
       background: linear-gradient(to bottom, $btn-top, $btn-bottom);
     }
   }
 
   span {
     margin-top: 0.3rem;
-    font-size: 4vw;
-    @media #{$landscape} {
-      font-size: 4vh;
-    }
+    @include scaleFont(4vw, 4vh);
     color: $secondary;
 
     .linkBtn {
@@ -80,9 +67,4 @@
       color: $primary;
     }
   }
-}
-
-.login__footer, .register__footer {
-  @include footerSection;
-  @include footerLinkBtn;
 }

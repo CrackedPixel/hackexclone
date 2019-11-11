@@ -1,12 +1,7 @@
 const error_codes = {
   existing_account: {
     title: "error",
-    message: "username already exists",
-    code: 1
-  },
-  existing_email: {
-    title: "error",
-    message: "email already exists",
+    message: "username or email exists",
     code: 1
   },
   db_insert_update : {

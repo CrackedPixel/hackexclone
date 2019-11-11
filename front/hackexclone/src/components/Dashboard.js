@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {Redirect} from 'react-router-dom';
 import { AppGridIcon } from './misc/AppGridIcon';
 
@@ -16,22 +16,25 @@ export const Dashboard = (props) => {
   const [lui, slui] = useState(false);
   const [ff, sFF] = useState(false);
 
+  useEffect(() => {
+    if (props.propStateData.didFadeDashboard !== true) {
+      setTimeout(() => {
+        props.propStateData.setDidFadeDashboard(true);
+        sFF(true);
+      }, 130)
+    }else{
+      sFF(true);
+    }
+  })
+
   if (!sessionStorage.getItem("userInfo")){
     return (
       <Redirect to="/" />
     )
   }
 
-  if (props.propStateData.didFadeDashboard !== true) {
-    setTimeout(() => {
-      props.propStateData.setDidFadeDashboard(true);
-      sFF(true);
-    }, 100)
-  }
-
   const handle_click = e => {
     if (lcc || !ff) {
-      console.log("lcc, ff", lcc, ff);
       e.preventDefault();
       return; 
     }
@@ -49,9 +52,7 @@ export const Dashboard = (props) => {
 
   if (!props.propStateData.userInfo.username && !lui) {
     slui(true);
-    console.log("Set prop");
     props.propStateData.setUserInfo(JSON.parse(sessionStorage.getItem('userInfo')));
-    console.log(JSON.parse(sessionStorage.getItem('userInfo')));
   }
 
   const tUserInfo = props.propStateData.userInfo;
@@ -62,8 +63,8 @@ export const Dashboard = (props) => {
       <section className="dashboard__top">
         <h1>Dashboard</h1>
         {
-          tUserInfo.userName ? (
-            <div className="userinfo__container"><span className="userinfo__name">{tUserInfo.userName}</span><span>&nbsp;level&nbsp;</span><span className="userinfo__level">{tUserInfo.level}</span></div>
+          tUserInfo.charName ? (
+            <div className="userinfo__container"><span className="userinfo__name">{tUserInfo.charName}</span><span>&nbsp;level&nbsp;</span><span className="userinfo__level">{tUserInfo.level}</span></div>
           ) : ( null )
         }
       </section>

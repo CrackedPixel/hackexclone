@@ -21,81 +21,30 @@
   width: 100%;
 }
 
-
-.overlay__error {
-  position: absolute;
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
-  width: 90%;
-
-  background: $secondary;
-  border-radius: 10px;
-  z-index: 1000;
-
-  // padding-top: 1rem;
-  // padding: 1rem;
-  padding: 5vw;
-  // top: 37vh;
+@mixin scaleFont($portrait-size, $landscape-size) {
+  font-size: $portrait-size;
   @media #{$landscape} {
-    padding: 5vh;
-    align-self: flex-start;
-    left: 5%;
+    font-size: $landscape-size;
   }
-
-  h3 {
-    text-transform: capitalize;
-    // font-size: 1.5rem;
-    font-size: 11vw;
-    @media #{$landscape} {
-      font-size: 11vh;
-    }
-  }
-
-  span {
-    text-transform: capitalize;
-    color: $red !important;
-    padding: 0;
-    margin: 0;
-
-    &:first-of-type {
-      padding-top: 2vw;
-      @media #{$landscape} {
-        padding-top: 2vh;
-      }
-    }
-
-    &:last-of-type {
-      padding-bottom: 5vw;
-      @media #{$landscape} {
-        padding-bottom: 5vh;
-      }
-    }
-    // padding-bottom: 1.5rem;
-  }
-
-  button {
-    text-transform: uppercase;
-    // font-size: 1rem;
-    font-size: 6vw;
-    @media #{$landscape} {
-      font-size: 6vh;
-    }
-    // width: 3rem;
-    border: 0;
-    background: $transparent;
-    // padding-bottom: 0.6rem;
-  }
-
-  &.shrink {
-    transform: scale(0);
-
-    transition: 0.5s all ease-in-out;
-  }
-
 }
 
-@mixin sizeBox($width: 100%, $height: 100%, $pad: 0, $margin: 0){
+@mixin sizeBoxScale($width: 100%, $widthL: 100%, $height: 100%, $heightL: 100%, $pad: 0, $padL: 0, $margin: 0, $marginL: 0) {
+  @media #{$portrait} {
+    width: $width;
+    height: $height;
+    padding: $pad;
+    margin: $margin;
+  }
+
+  @media #{$landscape} {
+    width: $widthL;
+    height: $heightL;
+    padding: $padL;
+    margin: $marginL;
+  }
+}
+
+@mixin sizeBox($width: 100%, $height: 100%, $pad: 0, $margin: 0) {
   width: $width;
   height: $height;
   padding: $pad;
@@ -120,11 +69,10 @@
 
   h1 {
     color: $secondary;
-    font-size: 13vw;
+    @include scaleFont(13vw, 13vh);
     margin: 3vh 2vw 0 2vw;
 
     @media #{$landscape} {
-      font-size: 13vh;
       margin: 3vw 0 0 0;
     }
   }
@@ -133,22 +81,18 @@
 @mixin footerSection() {
   margin-bottom: 5vh;
   margin-top: auto;
+  
   @media #{$landscape} {
     display: flex;
-    margin: 0 15vh 15vh auto;
+    margin: 0 15vh 26vh auto;
     align-self: flex-end;
   }
+
   .back-icon { 
     width: 8vw;
     height: 8vw;
-    @media #{$landscape} {
-      width: 8vh;
-      height: 8vh;
-    }
   }
-}
-
-@mixin footerLinkBtn() {
+  
   .linkBtn {
     display: flex;
     align-items: center;
@@ -156,4 +100,62 @@
     text-decoration: none;
     color: $primary;
   }
+}
+
+
+
+.overlay__error {
+  @include displayFlex(column nowrap, 90%, unset, 5vw, 0, center);
+  position: absolute;
+  background: $secondary;
+  border-radius: 5vw;
+  z-index: 1000;
+
+  @media #{$landscape} {
+    padding: 5vh;
+    align-self: flex-start;
+    left: 5%;
+  }
+
+  h3 {
+    text-transform: capitalize;
+    @include scaleFont(11vw, 11vh);
+  }
+
+  span {
+    text-transform: capitalize;
+    color: $red !important;
+    padding: 0;
+    margin: 0;
+
+    &:first-of-type {
+      padding-top: 2vw;
+
+      @media #{$landscape} {
+        padding-top: 2vh;
+      }
+    }
+
+    &:last-of-type {
+      padding-bottom: 5vw;
+
+      @media #{$landscape} {
+        padding-bottom: 5vh;
+      }
+    }
+  }
+
+  button {
+    text-transform: uppercase;
+    @include scaleFont(6vw, 6vh);
+
+    border: 0;
+    background: $transparent;
+  }
+
+  &.shrink {
+    transform: scale(0);
+    transition: 0.5s all ease-in-out;
+  }
+
 }

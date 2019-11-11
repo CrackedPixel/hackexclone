@@ -62,3 +62,11 @@ app.listen(config.server_port, () => {
 // })
 
 // console.log(nQuery.slice(0, -1));
+// account.verify_login({
+//   body: {
+//     username: "asd",
+//     password: "f10e2821bbbea527ea02200352313bc059445190"
+//   }
+// }, (res) => {
+//   console.log(res);
+// })

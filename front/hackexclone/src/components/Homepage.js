@@ -31,8 +31,11 @@ export const Homepage = (props) => {
       <section className="home__title">
         <h1>Home</h1>
       </section>
+      <section className="home__menuList">
+        <Link onClick={handleClicker} className="menuBtn" to={!lcc ? "/login" : ""}>Login</Link>
+      </section>
       <section className="home__logincontainer">
-        <Link onClick={handleClicker} className="linkBtn" to={!lcc ? "/login" : ""}>Login</Link>
+        
       </section>
     </div>
   )
