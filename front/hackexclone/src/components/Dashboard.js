@@ -21,7 +21,7 @@ export const Dashboard = (props) => {
       setTimeout(() => {
         props.propStateData.setDidFadeDashboard(true);
         sFF(true);
-      }, 130)
+      }, 151)
     }else{
       sFF(true);
     }
@@ -29,7 +29,6 @@ export const Dashboard = (props) => {
       slui(true);
       props.propStateData.setUserInfo(JSON.parse(sessionStorage.getItem('userInfo')));
     }
-
     console.log("DASHBOARD__RENDER");
   }, [props.propStateData])
 
@@ -48,7 +47,7 @@ export const Dashboard = (props) => {
       slcc(true);
       setTimeout(() => {
         slcc(false);
-      }, 400)
+      }, 450)
       props.propStateData.setCanClick();
     }else{
       e.preventDefault();
@@ -56,12 +55,8 @@ export const Dashboard = (props) => {
     }
   }
 
-  
-
   const tUserInfo = props.propStateData.userInfo;
   
-
-
   return (
     <div className="appPage bg-dashboard alwaysBack">
       <div className={props.propStateData.didFadeDashboard ? "overlay__fader zero-opacity" : "overlay__fader one-opacity"}></div>

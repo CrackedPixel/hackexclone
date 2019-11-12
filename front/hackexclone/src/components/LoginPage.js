@@ -29,10 +29,9 @@ export const LoginPage = (props) => {
   useEffect(() => {
     sfClass(tIC || props.propStateData.isChangingLogin ? staticPage : dynamicPage);
     if (sessionStorage.getItem("userInfo")){
-      return (
-        <Redirect to="/dashboard" />
-      )
+      return ( <Redirect to="/dashboard" /> )
     }
+    console.log("RENDERING LOGIN");
   }, [props.propStateData.isChangingLogin]);
   
   const changeTab = (newValue) => e => {
@@ -50,7 +49,6 @@ export const LoginPage = (props) => {
     sfClass(newValue ? staticPage : dynamicPage);
     props.propStateData.setIsChangingLogin(newValue);
     sTIC(newValue);
-    
   }
 
   
@@ -92,7 +90,7 @@ export const LoginPage = (props) => {
             setFaderClass(fadeoutStart);
             setTimeout(() => {
               setIsLoginOk(true); 
-            }, 1)
+            }, 160)
           }
         }, 1000)
       })
@@ -119,8 +117,6 @@ export const LoginPage = (props) => {
       return <span key={i}>{item}</span>
     })
   }
-
-console.log("RENDERING LOGIN");
 
   return (
        isLoginOk ? ( <Redirect to="/dashboard"/> ) : (

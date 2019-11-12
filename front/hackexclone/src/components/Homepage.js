@@ -4,6 +4,13 @@ import {Link, Redirect} from 'react-router-dom';
 export const Homepage = (props) => {
   const [lcc, slcc] = useState(false);
 
+  const ff = () => {
+    return sessionStorage.getItem("ff") || "0";
+  }
+  const sFF = (nVal) => {
+    sessionStorage.setItem("ff", nVal ? "1" : "0");
+  }
+
   if (sessionStorage.getItem("userInfo")){
     return (
       <Redirect to="/dashboard" />
