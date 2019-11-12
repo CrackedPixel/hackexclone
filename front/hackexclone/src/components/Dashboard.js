@@ -25,7 +25,13 @@ export const Dashboard = (props) => {
     }else{
       sFF(true);
     }
-  })
+    if (!props.propStateData.userInfo.username && !lui) {
+      slui(true);
+      props.propStateData.setUserInfo(JSON.parse(sessionStorage.getItem('userInfo')));
+    }
+
+    console.log("DASHBOARD__RENDER");
+  }, [props.propStateData])
 
   if (!sessionStorage.getItem("userInfo")){
     return (
@@ -50,12 +56,11 @@ export const Dashboard = (props) => {
     }
   }
 
-  if (!props.propStateData.userInfo.username && !lui) {
-    slui(true);
-    props.propStateData.setUserInfo(JSON.parse(sessionStorage.getItem('userInfo')));
-  }
+  
 
   const tUserInfo = props.propStateData.userInfo;
+  
+
 
   return (
     <div className="appPage bg-dashboard alwaysBack">

@@ -24,6 +24,12 @@ const create_account = (req, web_response) => {
     values: [username]
   })
   let Q3 = new DB.C_QueryBuilder({
+    statement: "UPDATE `addresses`",
+    set: ['charID'],
+    where: "`charid` is null",
+    limit: '1'
+  })
+  let Q4 = new DB.C_QueryBuilder({
     statement: "INSERT INTO `accounts`",
     insert: ['email', 'username', 'password', 'salt', 'charid']
   })
@@ -35,15 +41,21 @@ const create_account = (req, web_response) => {
 
     Q2.Execute(Q2R => {
       if (Q2R.code) return web_response.send({ code: Q2R.code, title: "error", message: Q2R.error })
-      if (Q2R.data.affectedRows !== 1){ return web_response.send(error_codes.db_insert_update);}
+      if (Q2R.data.affectedRows !== 1) return web_response.send(error_codes.db_insert_update);
 
       let charID = Q2R.data.insertId;
-      Q3.values = [email.toLowerCase(), username.toLowerCase(), sha1(password+nusalt), nusalt, charID];
+      Q3.values = [charID];
+      Q4.values = [email.toLowerCase(), username.toLowerCase(), sha1(password+nusalt), nusalt, charID];
 
       Q3.Execute(Q3R => {
         if (Q3R.code) return web_response.send({ code: Q3R.code, title: "error", message: Q3R.error });
-        if (Q3R.data.affectedRows !== 1){ return web_response.send(error_codes.db_insert_update);}
-        return web_response.send(error_codes.created_account);
+        if (Q3R.data.affectedRows !== 1) return web_response.send(error_codes.db_insert_update);
+
+        Q4.Execute(Q4R => {
+          if (Q4R.code) return web_response.send({ code: Q4R.code, title: "error", message: Q4R.error });
+          if (Q4R.data.affectedRows !== 1) return web_response.send(error_codes.db_insert_update);
+          return web_response.send(error_codes.created_account);
+        })
       })
     })
   })
@@ -60,8 +72,8 @@ const verify_login = (req, res) => {
     limit: "1"
   });
   let Q2 = new DB.C_QueryBuilder({
-    statement: "SELECT `charid`,`charName`, `level`, `cash_hand`, `cash_bank`",
-    join: "INNER JOIN `characters` ON accounts.charid=characters.index",
+    statement: "SELECT accounts.charid,`charName`, `level`, `cash_hand`, `cash_bank`, `ipaddress`",
+    join: "INNER JOIN `characters` ON accounts.charid=characters.index INNER JOIN `addresses` ON accounts.charid=addresses.charid",
     from: "accounts",
     limit: "1"
   });

@@ -353,8 +353,8 @@ body {
   margin: 0.5rem 0 0 0;
   text-transform: capitalize;
   font-size: 8vw;
-  background: -webkit-gradient(linear, left top, left bottom, from(#E4E4E4), to(#A1A0A3));
-  background: linear-gradient(to bottom, #E4E4E4, #A1A0A3);
+  background: -webkit-gradient(linear, left top, left bottom, from(#E4E4E4), to(#9FA0A2));
+  background: linear-gradient(to bottom, #E4E4E4, #9FA0A2);
 }
 
 @media only screen and (orientation: landscape) {
@@ -586,17 +586,169 @@ body {
 }
 
 .bg-mydevice {
-  background: red;
+  background: radial-gradient(#3A4E66, #313C4E, #313C4E);
+  overflow: hidden;
 }
 
 .bg-mydevice .mydevice__title {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-item-align: start;
-      align-self: flex-start;
-  margin: 1rem 0 0 1rem;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  width: 100%;
+  height: unset;
+  padding: 5vw;
+  margin: 0;
   color: #E2E8E7;
+}
+
+.bg-mydevice .mydevice__title h1 {
+  font-size: 8vw;
+  font-style: italic;
+  margin-bottom: 4vw;
+}
+
+@media only screen and (orientation: landscape) {
+  .bg-mydevice .mydevice__title h1 {
+    font-size: 8vh;
+  }
+}
+
+.bg-mydevice .mydevice__title .mydevice__device__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 100%;
+}
+
+.bg-mydevice .mydevice__title .mydevice__device__container .mydevice__device__info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+}
+
+.bg-mydevice .mydevice__title .mydevice__device__container .mydevice__device__info span {
+  font-size: 4vw;
+}
+
+@media only screen and (orientation: landscape) {
+  .bg-mydevice .mydevice__title .mydevice__device__container .mydevice__device__info span {
+    font-size: 4vh;
+  }
+}
+
+.bg-mydevice .mydevice__title .mydevice__device__container .mydevice__device__info span:first-child {
+  margin-bottom: 1vw;
+}
+
+.bg-mydevice .mydevice__title .mydevice__device__container .mydevice__device__buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.bg-mydevice .mydevice__title .mydevice__device__container .mydevice__device__buttons button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background: -webkit-gradient(linear, left top, left bottom, from(#E4E4E4), color-stop(#cbcbcb), color-stop(#929395), to(#535455));
+  background: linear-gradient(to bottom, #E4E4E4, #cbcbcb, #929395, #535455);
+}
+
+@media only screen and (orientation: portrait) {
+  .bg-mydevice .mydevice__title .mydevice__device__container .mydevice__device__buttons button {
+    width: 33vw;
+    height: 12vw;
+    border-radius: 2vw;
+    font-size: 5vw;
+  }
+}
+
+@media only screen and (orientation: landscape) {
+  .bg-mydevice .mydevice__title .mydevice__device__container .mydevice__device__buttons button {
+    width: 33vh;
+    height: 12vh;
+    border-radius: 2vw;
+    font-size: 5vh;
+  }
+}
+
+.bg-mydevice .mydevice__button {
+  font-family: 'Courier New', Courier, monospace;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  line-height: 12vw;
+  font-weight: 700;
+  text-decoration: none;
+  color: black;
+  border: 0;
+}
+
+.bg-mydevice .mydevice__button:visited {
+  text-decoration: none;
+  color: black;
+}
+
+.bg-mydevice .mydevice__content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  height: unset;
+  padding: 5vw;
+  margin: 0;
+}
+
+.bg-mydevice .mydevice__content .mydevice__button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background: -webkit-gradient(linear, left top, left bottom, from(#E4E4E4), color-stop(#cbcbcb), color-stop(#929395), to(#535455));
+  background: linear-gradient(to bottom, #E4E4E4, #cbcbcb, #929395, #535455);
+  margin-bottom: 5vw;
+}
+
+@media only screen and (orientation: portrait) {
+  .bg-mydevice .mydevice__content .mydevice__button {
+    width: 100%;
+    height: 12vw;
+    border-radius: 2vw;
+    font-size: 5vw;
+  }
+}
+
+@media only screen and (orientation: landscape) {
+  .bg-mydevice .mydevice__content .mydevice__button {
+    width: 33vh;
+    height: 12vh;
+    border-radius: 2vw;
+    font-size: 5vh;
+  }
 }
 
 .bg-mydevice .mydevice__footer {

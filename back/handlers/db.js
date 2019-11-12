@@ -22,6 +22,7 @@ class C_QueryBuilder {
   join = "";
   where = "";
   limit = "";
+  set = [];
   insert = [];
   values = [];
   constructor(props) {
@@ -29,6 +30,7 @@ class C_QueryBuilder {
       this.statement = props.statement;
       this.from = props.from;
       this.where = props.where;
+      this.set = props.set;
       this.limit = props.limit;
       this.insert = props.insert;
       this.values = props.values;
@@ -46,6 +48,12 @@ class C_QueryBuilder {
       nQuery += ` VALUES(${this.values.map((item) => {
         return `'${item}'`;
       })})`;
+    }
+    if (this.set) {
+      nQuery += ` SET ${this.set.map((item, i) => {
+        return `${item}='${this.values[i]}',`;
+      })}`;
+      nQuery = nQuery.slice(0,-1);
     }
     if (this.join) nQuery += ` ${this.join}`;
     if (this.where) nQuery += ` WHERE ${this.where}`;

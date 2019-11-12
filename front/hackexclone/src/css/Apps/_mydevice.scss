@@ -1,15 +1,69 @@
 .bg-mydevice {
-  background: red;
+  background: radial-gradient($bg-2, $bg-1, $bg-1);
+  overflow: hidden;
 
   .mydevice__title {
-    display: flex;
-    align-self: flex-start;
-    margin: 1rem 0 0 1rem;
+    @include displayFlex(column nowrap, 100%, unset, 5vw, 0, flex-start);
     color: $secondary;
+
+    h1 {
+      @include scaleFont(8vw, 8vh);
+      font-style: italic;
+      margin-bottom: 4vw;
+    }
+
+    .mydevice__device__container {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      width: 100%;
+
+      .mydevice__device__info {
+        display: flex;
+        flex-flow: column nowrap;
+
+        span {
+          @include scaleFont(4vw, 4vh);
+          &:first-child {
+            margin-bottom: 1vw;
+          }
+        }
+
+      }
+
+      .mydevice__device__buttons {
+        display: flex;
+
+        button {
+          @include btnDefault(33vw, 33vh, 12vw, 12vh, 5vw, 5vh, 2vw, 2vw, linear-gradient(to bottom, $btn-top, darken($btn-top, 10%), darken($btn-bottom, 5%), darken($btn-bottom, 30%)));
+        }
+      }
+    }
+  }
+
+  .mydevice__button {
+    font-family: 'Courier New', Courier, monospace;
+    justify-content: center;
+    line-height: 12vw;
+    font-weight: 700;
+    text-decoration: none;
+    color: $black;
+    border: 0;
+    &:visited {
+      text-decoration: none;
+      color: $black;
+    }
+    // box-shadow: 0px 4px 0px lighten($black, 30%), 0px 3px 15px rgba(0,0,0,.4);
   }
 
   .mydevice__content {
+    @include displayFlex(column nowrap, 100%, unset, 5vw, 0, center);
 
+    .mydevice__button {
+      // @include btnDefault(100%, 33vh, 12vw, 12vh, 5vw, 5vh, 2vw, 2vw, linear-gradient(to bottom, $btn-top, $btn-bottom));
+      @include btnDefault(100%, 33vh, 12vw, 12vh, 5vw, 5vh, 2vw, 2vw, linear-gradient(to bottom, $btn-top, darken($btn-top, 10%), darken($btn-bottom, 5%), darken($btn-bottom, 30%)));
+      margin-bottom: 5vw;
+    }
   }
 
   .mydevice__footer {

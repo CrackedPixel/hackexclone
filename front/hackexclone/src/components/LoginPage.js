@@ -28,15 +28,13 @@ export const LoginPage = (props) => {
   
   useEffect(() => {
     sfClass(tIC || props.propStateData.isChangingLogin ? staticPage : dynamicPage);
+    if (sessionStorage.getItem("userInfo")){
+      return (
+        <Redirect to="/dashboard" />
+      )
+    }
   }, [props.propStateData.isChangingLogin]);
   
-  
-  if (sessionStorage.getItem("userInfo")){
-    return (
-      <Redirect to="/dashboard" />
-    )
-  }
-
   const changeTab = (newValue) => e => {
     if (lcc || errorMsg) {
       e.preventDefault();
@@ -121,6 +119,8 @@ export const LoginPage = (props) => {
       return <span key={i}>{item}</span>
     })
   }
+
+console.log("RENDERING LOGIN");
 
   return (
        isLoginOk ? ( <Redirect to="/dashboard"/> ) : (

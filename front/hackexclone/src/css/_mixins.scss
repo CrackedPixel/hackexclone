@@ -21,6 +21,24 @@
   width: 100%;
 }
 
+
+@mixin btnDefault($width, $widthL, $height, $heightL, $fontsize, $fontsizeL, $br, $brL, $background) {
+  display: flex;
+  @media #{$portrait} {
+    width: $width;
+    height: $height;
+    border-radius: $br;
+    font-size: $fontsize;
+  }
+  @media #{$landscape} {
+    width: $widthL;
+    height: $heightL;
+    border-radius: $brL;
+    font-size: $fontsizeL;
+  }
+  background: $background;
+}
+
 @mixin scaleFont($portrait-size, $landscape-size) {
   font-size: $portrait-size;
   @media #{$landscape} {
