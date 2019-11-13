@@ -74,7 +74,7 @@ export const LoginPage = (props) => {
         password: sha1(values.passwd)
       }
       axiosWithAuth()
-      .post("/login", sendData)
+      .post("/login", sendData, {timeout: 2000})
       .then( res => {
         setTimeout(() => {
           console.log(res.data);
@@ -93,6 +93,15 @@ export const LoginPage = (props) => {
             }, 160)
           }
         }, 1000)
+      })
+      .catch(error => {
+        setSubmiting(false);
+        setErrorTitle("Error");
+        if (error.code === "ECONNABORTED"){
+          setErrorMsg("Unable to connect. Please try again later");
+          return;
+        }
+        setErrorMsg(error.message);
       })
     }
   }

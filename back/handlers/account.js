@@ -85,6 +85,7 @@ const verify_login = (req, res) => {
     Q2.Execute(Q2R => {
       if (Q2R.code) return res.send({code: Q2R.code, title: "error", message: Q2R.error });
       if (Q2R.matches !== 1) return res.send(error_codes.invalid_login);
+      token_master.createToken(Q2R.data[0]);
         return res.send({
           "validLogin": true,
           "userInfo": Q2R.data[0]
