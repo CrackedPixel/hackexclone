@@ -88,7 +88,7 @@ const verify_login = (req, res) => {
         return res.send({
           "validLogin": true,
           "userInfo": Q2R.data[0],
-          "token": token_master.createToken(Q2R.data[0]);
+          "token": token_master.createToken(Q2R.data[0])
         }); // - return
      }) // Q2
   }); // Q1
