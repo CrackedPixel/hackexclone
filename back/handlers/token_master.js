@@ -14,18 +14,21 @@ const token_validHeader = (req) => {
 }
 
 const createToken = (nUserInfo) => {
-  let token = jwt.sign(nUserInfo, config.jwt_secret, {
-      algorithm: 'HS256',
-      expiresIn: config.jwt_expires
-  });
-
-  return token;
+  try {
+    let token = jwt.sign({...nUserInfo}, config.jwt_secret, {
+        algorithm: 'HS256',
+        expiresIn: config.jwt_expires
+    });
+    return token;
+  }catch(error) {
+    return {[error]: true, message: error}
+  }
 }
 
 const isValidToken = (token) => {
   let rtnVal = { code: 0 }
   try {
-      rtnVal.payload = jwt.verify(token, config.jwt_secret);
+    rtnVal.payload = jwt.verify(token, config.jwt_secret);
   } catch (e) {
     rtnVal.code = (e instanceof jwt.JsonWebTokenError) ? HTEC.UNAUTHORIZED_401 : HTEC.BADREQUEST_400
   }
