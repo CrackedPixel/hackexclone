@@ -1,0 +1,12 @@
+const actions = {
+  G_CHANGING_LOGIN: 1,
+  S_CHANGING_LOGIN: 2,
+  G_GLOBAL_CLICK: 3,
+  S_GLOBAL_CLICK: 4,
+  G_DID_FADE_DASHBOARD: 5,
+  S_DID_FADE_DASHBOARD: 6,
+  G_USER_INFO: 7,
+  S_USER_INFO: 8
+}
+
+module.exports = actions;
