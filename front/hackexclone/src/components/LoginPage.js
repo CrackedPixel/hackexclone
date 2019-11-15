@@ -2,11 +2,12 @@ import React, {useState, useEffect } from 'react'
 import {Link, Redirect } from 'react-router-dom';
 
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-// import { Formik, Form, Field, ErrorMessage } from 'formik';
 import axiosWithAuth from "../utils/axiosWithAuth";
 import * as Yup from 'yup';
 
-// import CircularProgress from '@material-ui/core/CircularProgress';
+import { useSelector, useDispatch } from 'react-redux';
+import * as ac from '../Actions/actionCommands';
+
 import { ValidatedForm } from './misc/ValidatedForm';
 
 const sha1 = require('js-sha1');  
@@ -16,39 +17,48 @@ export const LoginPage = (props) => {
   let fadeoutEmpty = "overlay__fader zero-opacity";
   let fadeoutStart = fadeoutEmpty + " one-opacity";
   let dynamicPage = "appPage bg-login";
-  const [tIC, sTIC] = useState(props.propStateData.isChangingLogin);
+
+  // const [tIC, sTIC] = useState(is_changing_login);
   const [fClass, sfClass] = useState(dynamicPage);
   const [faderClass, setFaderClass] = useState(fadeoutEmpty);
-  const [lcc, slcc] = useState(false);
+
+  // const [lcc, slcc] = useState(false);
   const [isLoginOk, setIsLoginOk] = useState(false);
   const [submiting, setSubmiting] = useState(false);
   const [errorTitle, setErrorTitle] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [popupClass, setPopupClass] = useState("overlay__error");
+
+  const mainDispatch = useDispatch();
+
+  const is_changing_login = useSelector(state => state.CHANGING_LOGIN);
+  const global_click = useSelector(state => state.GLOBAL_CLICK);
   
   useEffect(() => {
-    sfClass(tIC || props.propStateData.isChangingLogin ? staticPage : dynamicPage);
+    sfClass(is_changing_login ? staticPage : dynamicPage);
     if (sessionStorage.getItem("userInfo")){
       return ( <Redirect to="/dashboard" /> )
     }
     console.log("RENDERING LOGIN");
-  }, [props.propStateData.isChangingLogin]);
+  }, [is_changing_login]);
   
   const changeTab = (newValue) => e => {
-    if (lcc || errorMsg) {
+    if (errorMsg) {
       e.preventDefault();
       return; 
     }
-    if (props.propStateData.canClick){
-      slcc(true);
-      props.propStateData.setCanClick();
+    if (global_click){
+      // slcc(true);
+      props.canClick();
+      // props.propStateData.setCanClick();
     }else{
       e.preventDefault();
       return;
     }
     sfClass(newValue ? staticPage : dynamicPage);
-    props.propStateData.setIsChangingLogin(newValue);
-    sTIC(newValue);
+    mainDispatch(ac.SET_CHANGING_LOGIN(newValue));
+    // props.propStateData.setIsChangingLogin(newValue);
+    // sTIC(newValue);
   }
 
   
@@ -63,11 +73,12 @@ export const LoginPage = (props) => {
 
   
   const handle_submit = (values) => {
-    if (lcc || errorMsg) {
+    if (errorMsg) {
       return;
     }
-    if (props.propStateData.canClick){
-      props.propStateData.setCanClick();
+    if (global_click){
+      props.canClick();
+      // props.propStateData.setCanClick();
       setSubmiting(true);
       let sendData = {
         username: values.username,
@@ -85,7 +96,8 @@ export const LoginPage = (props) => {
             return;
           }
           if (res.data.validLogin){
-            props.propStateData.setUserInfo(res.data.userInfo);
+            mainDispatch(ac.SET_USER_INFO(res.data.userInfo));
+            // props.propStateData.setUserInfo(res.data.userInfo);
             sessionStorage.setItem("userInfo", JSON.stringify(res.data.userInfo));
             setFaderClass(fadeoutStart);
             setTimeout(() => {

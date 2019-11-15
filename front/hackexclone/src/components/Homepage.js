@@ -1,32 +1,43 @@
 import React, {useState} from 'react'
 import {Link, Redirect} from 'react-router-dom';
 
+import { useSelector, useDispatch } from 'react-redux';
+const ac = require('../Actions/actionCommands');
+
 export const Homepage = (props) => {
-  const [lcc, slcc] = useState(false);
+  // const [lcc, slcc] = useState(false);
 
-  const ff = () => {
-    return sessionStorage.getItem("ff") || "0";
-  }
-  const sFF = (nVal) => {
-    sessionStorage.setItem("ff", nVal ? "1" : "0");
-  }
+  // const ff = () => {
+  //   return sessionStorage.getItem("ff") || "0";
+  // }
+  // const sFF = (nVal) => {
+  //   sessionStorage.setItem("ff", nVal ? "1" : "0");
+  // }
+  const mainDispatch = useDispatch();
+  const user_info = useSelector(state => state.USER_INFO);
+  const can_click = useSelector(state => state.GLOBAL_CLICK);
 
-  if (sessionStorage.getItem("userInfo")){
+  if (Object.keys(user_info).length !== 0){
+    // console.log("LEN", Object.keys(user_info).length)
+    console.log("Returning to dash from home");
     return (
       <Redirect to="/dashboard" />
     )
   }else{
-    props.propStateData.setDidFadeDashboard(false);
+    console.log("Fade dashboard from home set to 0");
+    mainDispatch(ac.SET_DID_FADE_DASHBOARD(0));
+    // props.propStateData.setDidFadeDashboard(false);
   }
 
   const handleClicker = e => {
-    if (lcc) {
-      e.preventDefault();
-      return; 
-    }
-    if (props.propStateData.canClick){
-      slcc(true);
-      props.propStateData.setCanClick();
+    // if (lcc) {
+    //   e.preventDefault();
+    //   return; 
+    // }
+    if (can_click){
+      // slcc(true);
+      props.canClick();
+      // props.propStateData.setCanClick();
     }else{
       e.preventDefault();
       return;
@@ -39,7 +50,7 @@ export const Homepage = (props) => {
         <h1>Home</h1>
       </section>
       <section className="home__menuList">
-        <Link onClick={handleClicker} className="menuBtn" to={!lcc ? "/login" : ""}>Login</Link>
+        <Link onClick={handleClicker} className="menuBtn" to="/login">Login</Link>
       </section>
       <section className="home__logincontainer">
         

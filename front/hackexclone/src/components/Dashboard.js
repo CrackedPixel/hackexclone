@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import {Redirect} from 'react-router-dom';
 import { AppGridIcon } from './misc/AppGridIcon';
+
+import { useSelector, useDispatch } from 'react-redux';
 
 import ListIcon from '@material-ui/icons/List';
 import TrackChangesIcon from '@material-ui/icons/TrackChanges';
@@ -11,60 +13,57 @@ import LaptopIcon from '@material-ui/icons/Laptop';
 import AppsIcon from '@material-ui/icons/Apps';
 import PhoneIphoneIcon from '@material-ui/icons/PhoneIphone';
 
-export const Dashboard = (props) => {
-  const [lcc, slcc] = useState(false);
-  const [lui, slui] = useState(false);
-  const [ff, sFF] = useState(false);
+import * as ac from '../Actions/actionCommands';
 
-  useEffect(() => {
-    if (props.propStateData.didFadeDashboard !== true) {
-      setTimeout(() => {
-        props.propStateData.setDidFadeDashboard(true);
-        sFF(true);
-      }, 151)
-    }else{
-      sFF(true);
-    }
-    if (!props.propStateData.userInfo.username && !lui) {
-      slui(true);
-      props.propStateData.setUserInfo(JSON.parse(sessionStorage.getItem('userInfo')));
-    }
-    console.log("DASHBOARD__RENDER");
-  }, [props.propStateData])
+export const Dashboard = (props) => {
+  const mainDispatch = useDispatch();
+  const global_click = useSelector(state => state.GLOBAL_CLICK);
+  const user_info = useSelector(state => state.USER_INFO);
+  const did_fade_dashboard = useSelector(state => state.FADE_DASHBOARD);
 
   if (!sessionStorage.getItem("userInfo")){
-    return (
-      <Redirect to="/" />
-    )
+    console.log("No user found logged in");
+    mainDispatch(ac.SET_USER_INFO({}));
+    return <Redirect to="/" /> 
+    console.log("Redirect failed (1)");
+  }else{
+    console.log("Found user");
+    if (!user_info.charName) {
+      console.log("set info from session to var");
+      let tUI = JSON.parse(sessionStorage.getItem('userInfo'));
+      mainDispatch(ac.SET_USER_INFO(tUI));
+    }
+  }
+  console.log("Redirect failed");
+  if (did_fade_dashboard === 0) {
+    mainDispatch(ac.SET_DID_FADE_DASHBOARD(1));
+    setTimeout(() => {
+      mainDispatch(ac.SET_DID_FADE_DASHBOARD(2));
+    }, 151)
   }
 
   const handle_click = e => {
-    if (lcc || !ff) {
-      e.preventDefault();
-      return; 
-    }
-    if (props.propStateData.canClick){
-      slcc(true);
-      setTimeout(() => {
-        slcc(false);
-      }, 450)
-      props.propStateData.setCanClick();
+    if (global_click){
+      props.canClick();
     }else{
       e.preventDefault();
       return;
     }
   }
 
-  const tUserInfo = props.propStateData.userInfo;
-  
+  // console.log("AC:", actionCommands);
+  console.log("DASHBOARD__RENDER");
+
+  console.log("fade", did_fade_dashboard);
+
   return (
     <div className="appPage bg-dashboard alwaysBack">
-      <div className={props.propStateData.didFadeDashboard ? "overlay__fader zero-opacity" : "overlay__fader one-opacity"}></div>
+      <div className={did_fade_dashboard === 2 ? "overlay__fader zero-opacity" : "overlay__fader one-opacity"}></div>
       <section className="dashboard__top">
         <h1>Dashboard</h1>
         {
-          tUserInfo.charName ? (
-            <div className="userinfo__container"><span className="userinfo__name">{tUserInfo.charName}</span><span>&nbsp;level&nbsp;</span><span className="userinfo__level">{tUserInfo.level}</span></div>
+          user_info.charName ? (
+            <div className="userinfo__container"><span className="userinfo__name">{user_info.charName}</span><span>&nbsp;level&nbsp;</span><span className="userinfo__level">{user_info.level}</span></div>
           ) : ( null )
         }
       </section>

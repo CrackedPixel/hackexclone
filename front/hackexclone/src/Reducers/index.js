@@ -1,9 +1,12 @@
 import {combineReducers} from 'redux';
 
-import mainReducer from './mainReducer';
+import {CHANGING_LOGIN, GLOBAL_CLICK, FADE_DASHBOARD, USER_INFO} from './mainReducer';
 
 const allReducers = combineReducers({
-  [mainReducer] : mainReducer
-});
+  CHANGING_LOGIN,
+  GLOBAL_CLICK,
+  FADE_DASHBOARD,
+  USER_INFO
+})
 
 export default allReducers;

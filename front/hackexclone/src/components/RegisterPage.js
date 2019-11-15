@@ -1,30 +1,34 @@
 import React, {useState} from 'react'
 import {Link} from 'react-router-dom';
-// import { Formik, Form, Field, ErrorMessage } from 'formik';
 import axiosWithAuth from "../utils/axiosWithAuth";
 import * as Yup from 'yup';
-
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-// import CircularProgress from '@material-ui/core/CircularProgress';
+
+import { useSelector, useDispatch } from 'react-redux';
+import * as ac from '../Actions/actionCommands';
+
 import { ValidatedForm } from './misc/ValidatedForm';
 
 const sha1 = require('js-sha1');  
 
 export const RegisterPage = (props) => {
-  const [lcc, slcc] = useState(false);
+  // const [lcc, slcc] = useState(false);
   const [submiting, setSubmiting] = useState(false);
   const [errorTitle, setErrorTitle] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [popupClass, setPopupClass] = useState("overlay__error");
   
+  const global_click = useSelector(state => state.GLOBAL_CLICK);
+
   const handleClicker = e => {
-    if (lcc || errorMsg) {
+    if (errorMsg) {
       e.preventDefault();
       return; 
     }
-    if (props.propStateData.canClick){
-      slcc(true);
-      props.propStateData.setCanClick();
+    if (global_click){
+      // slcc(true);
+      props.canClick();
+      // props.propStateData.setCanClick();
     }else{
       e.preventDefault();
       return;
@@ -42,30 +46,40 @@ export const RegisterPage = (props) => {
 
   const handle_submit = (values) => {
     // let encPW = sha1(e.passwd);
-    if (lcc || errorMsg) {
+    if (errorMsg) {
       return;
     }
-    if (props.propStateData.canClick){
-      props.propStateData.setCanClick();
+    if (global_click){
+      props.canClick();
+      // props.propStateData.setCanClick();
       setSubmiting(true);
-      slcc(true);
+      // slcc(true);
       let sendData = {
         email: values.email,
         username: values.username,
         password: sha1(values.passwd)
       }
       axiosWithAuth()
-      .post("/register", sendData)
+      .post("/register", sendData, {timeout: 2000})
       .then( res => {
         setTimeout(() => {
           console.log(res.data);
           setSubmiting(false);
-          slcc(false);
+          // slcc(false);
           if (res.data.message){
             setErrorTitle(res.data.title);
             setErrorMsg(res.data.message);
           }
         }, 1000)
+      })
+      .catch(error => {
+        setSubmiting(false);
+        setErrorTitle("Error");
+        if (error.code === "ECONNABORTED"){
+          setErrorMsg("Unable to connect. Please try again later");
+          return;
+        }
+        setErrorMsg(error.message);
       })
     }
   }
