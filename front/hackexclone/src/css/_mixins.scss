@@ -129,10 +129,13 @@
   border-radius: 5vw;
   z-index: 1000;
 
+  top: 30vh;
+  left: 5vw;
+
   @media #{$landscape} {
     padding: 5vh;
     align-self: flex-start;
-    left: 5%;
+    left: 5vw;
   }
 
   h3 {
@@ -145,6 +148,8 @@
     color: $red !important;
     padding: 0;
     margin: 0;
+
+    @include scaleFont(4vw, 4vh);
 
     &:first-of-type {
       padding-top: 2vw;

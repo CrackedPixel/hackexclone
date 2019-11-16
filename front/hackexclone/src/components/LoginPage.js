@@ -91,12 +91,8 @@ export const LoginPage = (props) => {
             return;
           }
           if (res.data.validLogin){
-            
-            // props.propStateData.setUserInfo(res.data.userInfo);
-            
             setFaderClass(fadeoutStart);
             setTimeout(() => {
-              // mainDispatch(ac.SET_USER_INFO(res.data.userInfo));
               sessionStorage.setItem("userInfo", JSON.stringify(res.data.userInfo));
               setIsLoginOk(true); 
             }, 900)

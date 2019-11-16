@@ -1,6 +1,5 @@
 import React from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 export const ValidatedForm = (props) => {

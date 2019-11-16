@@ -26,9 +26,7 @@ export const RegisterPage = (props) => {
       return; 
     }
     if (global_click){
-      // slcc(true);
       props.canClick();
-      // props.propStateData.setCanClick();
     }else{
       e.preventDefault();
       return;

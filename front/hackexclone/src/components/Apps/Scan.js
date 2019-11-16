@@ -6,8 +6,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import * as ac from '../../Actions/actionCommands';
 
 import * as Yup from 'yup';
-import { ValidatedForm } from '../misc/ValidatedForm';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 
+import CircularProgress from '@material-ui/core/CircularProgress';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 export const Scan = (props) => {
@@ -31,12 +32,57 @@ export const Scan = (props) => {
     }
   }
 
+  const ip_match = /^(\d+)\.(\d+)\.(\d+)\.(\d+)/;
+
   const validate_scan = Yup.object().shape({
-    ipaddress: Yup.string()
+    scanip: Yup.string()
       .required("Required")
-      .matches("^(\d|[1-9]\d|1\d\d|2([0-4]\d|5[0-5]))\.(\d|[1-9]\d|1\d\d|2([0-4]\d|5[0-5]))\.(\d|[1-9]\d|1\d\d|2([0-4]\d|5[0-5]))\.(\d|[1-9]\d|1\d\d|2([0-4]\d|5[0-5]))",
-      "Invalid")
+      .min(8, "Invalid IP")
+      .max(15, "Invalid IP")
+      .matches(ip_match, "Invalid IP Address")
+      // .matches(ip_match, { message:'Invalid IP address', excludeEmptyString: true })
   })
+
+  const handle_submit = (values) => {
+    console.log("Trying submit", values, errorMsg);
+    if (errorMsg) return;
+    if (global_click){
+      props.canClick();
+      setSubmiting(true);
+      let sendData = {
+        "scanip": values.scanip
+      }
+      axiosWithAuth()
+      .post("/apps/scan/scan", sendData, {timeout: 2000})
+      .then( res => {
+        setTimeout(() => {
+          console.log(res.data);
+          setSubmiting(false);
+          if (res.data.message){
+            setErrorTitle(res.data.title);
+            setErrorMsg(res.data.message);
+            return;
+          }
+          // if (res.data.validLogin){
+          //   setFaderClass(fadeoutStart);
+          //   setTimeout(() => {
+          //     sessionStorage.setItem("userInfo", JSON.stringify(res.data.userInfo));
+          //     setIsLoginOk(true); 
+          //   }, 900)
+          // }
+        }, 1000)
+      })
+      .catch(error => {
+        setSubmiting(false);
+        setErrorTitle("Error");
+        if (error.code === "ECONNABORTED"){
+          setErrorMsg("Unable to connect. Please try again later");
+          return;
+        }
+        setErrorMsg(error.message);
+      })
+    }
+  }
 
   const handle_click = e => {
     if (global_click){
@@ -47,14 +93,10 @@ export const Scan = (props) => {
     }
     console.log("Clicked", e.target.value);
     switch (parseInt(e.target.value)) {
-      case -1: 
-        
-      break;
       case 0:
-          e.preventDefault();
-          return (<Redirect to="/dashboard" /> )
-      default:
-        e.preventDefault();
+          
+      break;
+      default: break;
     }
   }
   
@@ -69,11 +111,45 @@ export const Scan = (props) => {
 
   return (
     <div className="appPage bg-scan">
+      
       <section className="scan__top">
-        <ValidatedForm />
+        <Formik
+          initialValues={{scanip: ''}}
+          onSubmit={handle_submit}
+          validationSchema={validate_scan}
+        >
+          {formikProps => (
+            <Form className="formik__form--container" onSubmit={formikProps.handleSubmit}>  
+              <Field
+                className="formik__form--field" 
+                onChange={formikProps.handleChange}
+                type='text'
+                name='scanip'
+                placeholder='ip address' 
+              />
+              <ErrorMessage name='scanip' component="div" className="error error-message"/>
+              <button type="submit" disabled={submiting}>Scan</button>
+            </Form>
+          )}
+        </Formik>
       </section>
       <section className="scan__results">
-
+      {
+          (!errorMsg) ? ( null ) : ( 
+            <div className={popupClass}>
+              <h3>{errorTitle}</h3>
+              <span>{errorMsg}</span>
+              <button onClick={closeDialogue}>ok</button>
+            </div>
+          )
+        }
+      {
+        submiting ? ( 
+          <CircularProgress className="loadingProgress" /> 
+        ) : ( 
+          <div className="loadingProgress">&nbsp;</div> 
+        )
+      }
       </section>
       <section className="scan__footer">
         <Link className="linkBtn" onClick={handle_click} to="/dashboard"><ExitToAppIcon className="back-icon flip-x"/><span>Back</span></Link>

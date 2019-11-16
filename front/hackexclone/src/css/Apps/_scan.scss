@@ -1,8 +1,12 @@
 .bg-scan {
-  background: red;
+  background: darkgreen;
   overflow: hidden;
 
   .scan__top {
-    
+
+  }
+
+  .scan__footer {
+    @include footerSection;
   }
 }

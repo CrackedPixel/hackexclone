@@ -55,6 +55,8 @@ body {
   background: #E2E8E7;
   border-radius: 5vw;
   z-index: 1000;
+  top: 30vh;
+  left: 5vw;
 }
 
 @media only screen and (orientation: landscape) {
@@ -62,7 +64,7 @@ body {
     padding: 5vh;
     -ms-flex-item-align: start;
         align-self: flex-start;
-    left: 5%;
+    left: 5vw;
   }
 }
 
@@ -82,6 +84,13 @@ body {
   color: red !important;
   padding: 0;
   margin: 0;
+  font-size: 4vw;
+}
+
+@media only screen and (orientation: landscape) {
+  .overlay__error span {
+    font-size: 4vh;
+  }
 }
 
 .overlay__error span:first-of-type {
@@ -586,8 +595,41 @@ body {
 }
 
 .bg-scan {
-  background: red;
+  background: darkgreen;
   overflow: hidden;
+}
+
+.bg-scan .scan__footer {
+  margin-bottom: 5vh;
+  margin-top: auto;
+}
+
+@media only screen and (orientation: landscape) {
+  .bg-scan .scan__footer {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin: 0 15vh 26vh auto;
+    -ms-flex-item-align: end;
+        align-self: flex-end;
+  }
+}
+
+.bg-scan .scan__footer .back-icon {
+  width: 8vw;
+  height: 8vw;
+}
+
+.bg-scan .scan__footer .linkBtn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 6vw;
+  text-decoration: none;
+  color: #A3E134;
 }
 
 .bg-mydevice {

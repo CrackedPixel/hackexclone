@@ -17,6 +17,11 @@ const error_codes = {
     title: "error",
     message: "username or password incorrect",
     code: 1
+  },
+  not_logged_in: {
+    title: "error",
+    message: "login required",
+    code: 1
   }
 };
 
