@@ -585,6 +585,11 @@ body {
   }
 }
 
+.bg-scan {
+  background: red;
+  overflow: hidden;
+}
+
 .bg-mydevice {
   background: radial-gradient(#3A4E66, #313C4E, #313C4E);
   overflow: hidden;

@@ -12,6 +12,7 @@ import { Dashboard } from './components/Dashboard';
 import { MyDevice } from './components/Apps/MyDevice';
 
 import './css/main.css';
+import { Scan } from './components/Apps/Scan';
 
 const actionCommands = require('./Actions/actionCommands');
 
@@ -43,6 +44,8 @@ function App() {
                 <Route exact path="/login" render={(props) => <LoginPage canClick={clickTimer}/>} />
                 <Route exact path="/register"  render={(props) => <RegisterPage canClick={clickTimer}/>} />
                 <Route exact path="/dashboard"  render={(props) => <Dashboard canClick={clickTimer}/>} />
+
+                <Route exact path="/scan"  render={(props) => <Scan canClick={clickTimer}/>} />
 
                 <Route exact path="/mydevice"  render={(props) => <MyDevice canClick={clickTimer}/>} />
               

@@ -14,12 +14,15 @@ const sha1 = require('js-sha1');
 
 export const LoginPage = (props) => {  
   let staticPage = "appPage bg-login alwaysBack";
-  let fadeoutEmpty = "overlay__fader zero-opacity";
-  let fadeoutStart = fadeoutEmpty + " one-opacity";
   let dynamicPage = "appPage bg-login";
 
+
+  let fadeoutEmpty = "overlay__fader zero-opacity";
+  let fadeoutStart = "overlay__fader one-opacity";
+  
+
   // const [tIC, sTIC] = useState(is_changing_login);
-  const [fClass, sfClass] = useState(dynamicPage);
+  // const [fClass, sfClass] = useState(dynamicPage);
   const [faderClass, setFaderClass] = useState(fadeoutEmpty);
 
   // const [lcc, slcc] = useState(false);
@@ -34,13 +37,10 @@ export const LoginPage = (props) => {
   const is_changing_login = useSelector(state => state.CHANGING_LOGIN);
   const global_click = useSelector(state => state.GLOBAL_CLICK);
   
-  // useEffect(() => {
-    sfClass(is_changing_login ? staticPage : dynamicPage);
-    if (sessionStorage.getItem("userInfo")){
-      return ( <Redirect to="/dashboard" /> )
-    }
-    console.log("RENDERING LOGIN");
-  // }, [is_changing_login]);
+  if (sessionStorage.getItem("userInfo")){
+    return ( <Redirect to="/dashboard" /> )
+  }
+  
   
   const changeTab = (newValue) => e => {
     if (errorMsg) {
@@ -48,17 +48,12 @@ export const LoginPage = (props) => {
       return; 
     }
     if (global_click){
-      // slcc(true);
       props.canClick();
-      // props.propStateData.setCanClick();
     }else{
       e.preventDefault();
       return;
     }
-    sfClass(newValue ? staticPage : dynamicPage);
     mainDispatch(ac.SET_CHANGING_LOGIN(newValue));
-    // props.propStateData.setIsChangingLogin(newValue);
-    // sTIC(newValue);
   }
 
   
@@ -96,13 +91,15 @@ export const LoginPage = (props) => {
             return;
           }
           if (res.data.validLogin){
-            mainDispatch(ac.SET_USER_INFO(res.data.userInfo));
+            
             // props.propStateData.setUserInfo(res.data.userInfo);
-            sessionStorage.setItem("userInfo", JSON.stringify(res.data.userInfo));
+            
             setFaderClass(fadeoutStart);
             setTimeout(() => {
+              // mainDispatch(ac.SET_USER_INFO(res.data.userInfo));
+              sessionStorage.setItem("userInfo", JSON.stringify(res.data.userInfo));
               setIsLoginOk(true); 
-            }, 160)
+            }, 900)
           }
         }, 1000)
       })
@@ -139,9 +136,11 @@ export const LoginPage = (props) => {
     })
   }
 
+  console.log("RENDERING LOGIN");
+
   return (
        isLoginOk ? ( <Redirect to="/dashboard"/> ) : (
-      <div className={fClass}>
+      <div className={is_changing_login ? staticPage : dynamicPage}>
         <div className={faderClass}>{""}</div>
         <section className="login__infobox">
           <h1>Login</h1>

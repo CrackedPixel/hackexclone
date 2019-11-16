@@ -40,7 +40,7 @@ export const MyDevice = (props) => {
           sff(true);
           setTimeout(() => {
             sessionStorage.removeItem('userInfo');
-          }, 501)
+          }, 900)
       break;
       case 0:
       break;
