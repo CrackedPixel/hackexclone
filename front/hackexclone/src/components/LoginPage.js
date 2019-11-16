@@ -1,4 +1,4 @@
-import React, {useState, useEffect } from 'react'
+import React, {useState } from 'react'
 import {Link, Redirect } from 'react-router-dom';
 
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
@@ -34,13 +34,13 @@ export const LoginPage = (props) => {
   const is_changing_login = useSelector(state => state.CHANGING_LOGIN);
   const global_click = useSelector(state => state.GLOBAL_CLICK);
   
-  useEffect(() => {
+  // useEffect(() => {
     sfClass(is_changing_login ? staticPage : dynamicPage);
     if (sessionStorage.getItem("userInfo")){
       return ( <Redirect to="/dashboard" /> )
     }
     console.log("RENDERING LOGIN");
-  }, [is_changing_login]);
+  // }, [is_changing_login]);
   
   const changeTab = (newValue) => e => {
     if (errorMsg) {

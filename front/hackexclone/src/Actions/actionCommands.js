@@ -5,7 +5,7 @@ export const SET_CHANGING_LOGIN = newVal => {
   return {
     type: ma.S_CHANGING_LOGIN,
     payload: newVal
-  };
+  }
 }
 
 export const SET_GLOBAL_CLICK = newVal => {

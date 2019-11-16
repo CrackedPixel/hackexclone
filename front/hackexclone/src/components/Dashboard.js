@@ -23,18 +23,15 @@ export const Dashboard = (props) => {
 
   if (!sessionStorage.getItem("userInfo")){
     console.log("No user found logged in");
-    mainDispatch(ac.SET_USER_INFO({}));
-    return <Redirect to="/" /> 
-    console.log("Redirect failed (1)");
+    return (<Redirect to="/" /> )
   }else{
     console.log("Found user");
     if (!user_info.charName) {
       console.log("set info from session to var");
-      let tUI = JSON.parse(sessionStorage.getItem('userInfo'));
-      mainDispatch(ac.SET_USER_INFO(tUI));
+      mainDispatch(ac.SET_USER_INFO(JSON.parse(sessionStorage.getItem('userInfo'))));
     }
   }
-  console.log("Redirect failed");
+  
   if (did_fade_dashboard === 0) {
     mainDispatch(ac.SET_DID_FADE_DASHBOARD(1));
     setTimeout(() => {
@@ -51,10 +48,7 @@ export const Dashboard = (props) => {
     }
   }
 
-  // console.log("AC:", actionCommands);
   console.log("DASHBOARD__RENDER");
-
-  console.log("fade", did_fade_dashboard);
 
   return (
     <div className="appPage bg-dashboard alwaysBack">

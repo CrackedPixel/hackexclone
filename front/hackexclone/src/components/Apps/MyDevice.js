@@ -1,38 +1,34 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import {Link, Redirect} from 'react-router-dom';
+
+import { useSelector, useDispatch } from 'react-redux';
+import * as ac from '../../Actions/actionCommands';
 
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 
 export const MyDevice = (props) => {
-  const [lcc, slcc] = useState(false);
-  const [ff, sff] = useState(false);
-  const [lui, slui] = useState(false);
+   const [ff, sff] = useState(false);
 
-  useEffect(() => {
-    if (!props.propStateData.userInfo.username && !lui) {
-      slui(true);
-      props.propStateData.setUserInfo(JSON.parse(sessionStorage.getItem('userInfo')));
-    }
-  }, [slui])
+  const mainDispatch = useDispatch();
+
+  const user_info = useSelector(state => state.USER_INFO);
+  const global_click = useSelector(state => state.GLOBAL_CLICK);
 
   if (!sessionStorage.getItem("userInfo")){
-    return (
-      <Redirect to="/" />
-    )
-  }  
+    console.log("No user found logged in");
+    return (<Redirect to="/" /> )
+  }else{
+    console.log("Found user");
+    if (!user_info.charName) {
+      console.log("set info from session to var");
+      mainDispatch(ac.SET_USER_INFO(JSON.parse(sessionStorage.getItem('userInfo'))));
+    }
+  }
 
   const handle_click = e => {
-    if (lcc || ff) {
-      e.preventDefault();
-      return; 
-    }
-    if (props.propStateData.canClick){
-      slcc(true);
-      setTimeout(() => {
-        slcc(false);
-      }, 400)
-      props.propStateData.setCanClick();
+    if (global_click || ff){
+      props.canClick();
     }else{
       e.preventDefault();
       return;
@@ -44,15 +40,13 @@ export const MyDevice = (props) => {
           sff(true);
           setTimeout(() => {
             sessionStorage.removeItem('userInfo');
-          }, 550)
+          }, 501)
       break;
       case 0:
       break;
       default:
     }
   }
-
-  const tUserInfo = props.propStateData.userInfo;
 
   return (
     <div className="appPage bg-mydevice">
@@ -61,7 +55,7 @@ export const MyDevice = (props) => {
         <h1>My Device</h1>
         <div className="mydevice__device__container">
           <div className="mydevice__device__info">
-            <span>{`IP: ${tUserInfo.ipaddress}`}</span>
+            <span>{`IP: ${user_info.ipaddress}`}</span>
             <span>{`Platform: Nova X`}</span>
             <span>{`CPU: 3.25 GHz 8-Core`}</span>
             <span>{`Network: 5GS`}</span>

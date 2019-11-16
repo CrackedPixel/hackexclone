@@ -8,6 +8,7 @@ const DB = require('./handlers/db');
 // const organization = require('./handlers/organization');
 const token_master = require('./handlers/token_master');
 const account = require('./handlers/account');
+const apps = require('./handlers/apps');
 // const instructor = require('./handlers/instructor');
 // const passages = require('./handlers/passages');
 // const student = require('./handlers/student');
@@ -27,6 +28,7 @@ app.get(`${PF}`, (req, res) => {
 app.post(`${PF}refresh`, token_master.token_refresh);
 app.post(`${PF}register`, account.create_account);
 app.post(`${PF}login`, account.verify_login);
+app.post(`${PF}apps/scan/scan`, apps.scan_scan_random)
 // app.post(`${PF}organization/list`, organization.list_all);
 // app.post(`${PF}organization/info`, organization.org_check);
 // app.post(`${PF}organization/adduser`, organization.addUser);
