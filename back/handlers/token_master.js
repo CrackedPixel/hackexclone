@@ -4,9 +4,9 @@ const jwt = require('jsonwebtoken');
 const HTEC = require('./htec');
 
 const token_validHeader = (req) => {
-  let tToken = getTokenFromHeader(req.headers.cookie);
+  let tToken = req.headers.token; //getTokenFromHeader(req.headers.cookie);
   if (!tToken) return {code: HTEC.UNAUTHORIZED_401};
-
+  
   var tempToken = isValidToken(tToken);
   if (tempToken.code !== 0) return {code: tempToken.code};
 

@@ -1,9 +1,63 @@
 .bg-scan {
-  background: darkgreen;
+  background: radial-gradient($bg-2, $bg-1, $bg-1);
   overflow: hidden;
 
   .scan__top {
+    margin-top: 8vw;
+    width: 90%;
 
+    .formik__form--container {
+      display: flex;
+
+      .formik__form--field {
+        flex-grow: 1;
+        @include scaleFont(4vw, 4vh);
+        border-radius: 1.5vw;
+        border: 0;
+        padding: 2vw;
+        color: $grey;
+        margin-right: 2vw;
+      }
+
+      button {
+        font-family: 'Lucida Console';
+        letter-spacing: -1px;
+        text-transform: capitalize;
+        // width: 15vw;
+        padding: 1vw 2vw;
+        background: linear-gradient(to bottom, $btn-top, $btn-bottom);
+        border-radius: 1.5vw;
+        @include scaleFont(5vw, 5vh);
+      }
+    }
+  }
+
+  .scan__results {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    margin-top: 3vw;
+    width: 90%;
+    
+    .scan__result {
+      display: flex;
+      flex-flow: column nowrap;
+      width: 100%;
+      background: rgba(1,1,1,0.3);
+      margin: 0.5vw 0;
+      padding: 4vw 2vw;
+      border: 0;
+      text-align: left;
+
+      @include scaleFont(3.8vw, 3.8vh);
+
+      span {
+        color: $white;
+        &:focus {
+          outline: 0 !important;
+        }
+      }
+    }
   }
 
   .scan__footer {

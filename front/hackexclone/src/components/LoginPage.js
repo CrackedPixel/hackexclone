@@ -94,6 +94,7 @@ export const LoginPage = (props) => {
             setFaderClass(fadeoutStart);
             setTimeout(() => {
               sessionStorage.setItem("userInfo", JSON.stringify(res.data.userInfo));
+              sessionStorage.setItem("token", res.data.token);
               setIsLoginOk(true); 
             }, 900)
           }

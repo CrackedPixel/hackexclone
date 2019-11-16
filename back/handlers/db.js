@@ -1,14 +1,6 @@
 'use strict';
 const mysql = require('mysql');
 
-// const db_conn = mysql.createPool({
-//   host: "192.168.1.19",
-//   user: "reading",
-//   password: "rainbow",
-//   database: "reading"
-// });
-
-
 const db_conn = mysql.createPool({
   host: "192.168.1.19",
   user: "hackexcloner",
@@ -32,6 +24,7 @@ class C_QueryBuilder {
       this.where = props.where;
       this.set = props.set;
       this.limit = props.limit;
+      this.sort = props.sort;
       this.insert = props.insert;
       this.values = props.values;
       this.join = props.join;
@@ -57,6 +50,7 @@ class C_QueryBuilder {
     }
     if (this.join) nQuery += ` ${this.join}`;
     if (this.where) nQuery += ` WHERE ${this.where}`;
+    if (this.sort) nQuery += ` ORDER BY ${this.sort}`;
     if (this.limit) nQuery += ` LIMIT ${this.limit}`;
     nQuery += ";"
     

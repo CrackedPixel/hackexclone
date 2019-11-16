@@ -20,8 +20,8 @@ const create_account = (req, web_response) => {
   })
   let Q2 = new DB.C_QueryBuilder({
     statement: "INSERT INTO `characters`",
-    insert: ['charName'],
-    values: [username]
+    insert: ['charName', 'charType'],
+    values: [username, '1']
   })
   let Q3 = new DB.C_QueryBuilder({
     statement: "UPDATE `addresses`",
@@ -65,6 +65,8 @@ const verify_login = (req, res) => {
   console.log(req.body);
   const {username, password} = req.body;
 
+  if (!username || !password) return res.send(error_codes.missing_or_invalid_data);
+
   let Q1 = new DB.C_QueryBuilder({
     statement: "SELECT `index`, `salt`, `charid`",
     from: "accounts",
@@ -72,7 +74,7 @@ const verify_login = (req, res) => {
     limit: "1"
   });
   let Q2 = new DB.C_QueryBuilder({
-    statement: "SELECT accounts.charid,`charName`, `level`, `cash_hand`, `cash_bank`, `ipaddress`",
+    statement: "SELECT accounts.charid, `charName`, `charLevel`, `cash_hand`, `cash_bank`, `ipaddress`",
     join: "INNER JOIN `characters` ON accounts.charid=characters.index INNER JOIN `addresses` ON accounts.charid=addresses.charid",
     from: "accounts",
     limit: "1"
@@ -88,7 +90,10 @@ const verify_login = (req, res) => {
         return res.send({
           "validLogin": true,
           "userInfo": Q2R.data[0],
-          "token": token_master.createToken(Q2R.data[0])
+          "token": token_master.createToken({
+            "accid": Q1R.data[0].index,
+            "charid": Q1R.data[0].charid
+          })
         }); // - return
      }) // Q2
   }); // Q1

@@ -10,6 +10,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 
 import CircularProgress from '@material-ui/core/CircularProgress';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { ScanResult } from '../misc/ScanResult';
 
 export const Scan = (props) => {
   const mainDispatch = useDispatch();
@@ -17,6 +18,7 @@ export const Scan = (props) => {
   const [errorTitle, setErrorTitle] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [popupClass, setPopupClass] = useState("overlay__error");
+  const [searchResults, setSearchResults] = useState();
 
   const user_info = useSelector(state => state.USER_INFO);
   const global_click = useSelector(state => state.GLOBAL_CLICK);
@@ -39,8 +41,7 @@ export const Scan = (props) => {
       .required("Required")
       .min(8, "Invalid IP")
       .max(15, "Invalid IP")
-      .matches(ip_match, "Invalid IP Address")
-      // .matches(ip_match, { message:'Invalid IP address', excludeEmptyString: true })
+      .matches(ip_match, "Invalid IP")
   })
 
   const handle_submit = (values) => {
@@ -56,12 +57,19 @@ export const Scan = (props) => {
       .post("/apps/scan/scan", sendData, {timeout: 2000})
       .then( res => {
         setTimeout(() => {
-          console.log(res.data);
           setSubmiting(false);
           if (res.data.message){
             setErrorTitle(res.data.title);
             setErrorMsg(res.data.message);
             return;
+          }
+          console.log(res.data);
+          if (res.data.length === 0){
+
+          }else {
+            setSearchResults(res.data.map((item, i) => {
+              return <ScanResult key={i} ite={item} />
+            }));
           }
           // if (res.data.validLogin){
           //   setFaderClass(fadeoutStart);
@@ -116,7 +124,7 @@ export const Scan = (props) => {
         <Formik
           initialValues={{scanip: ''}}
           onSubmit={handle_submit}
-          validationSchema={validate_scan}
+          // validationSchema={validate_scan}
         >
           {formikProps => (
             <Form className="formik__form--container" onSubmit={formikProps.handleSubmit}>  
@@ -128,7 +136,7 @@ export const Scan = (props) => {
                 placeholder='ip address' 
               />
               <ErrorMessage name='scanip' component="div" className="error error-message"/>
-              <button type="submit" disabled={submiting}>Scan</button>
+              <button type="submit" disabled={submiting}>ping</button>
             </Form>
           )}
         </Formik>
@@ -147,7 +155,7 @@ export const Scan = (props) => {
         submiting ? ( 
           <CircularProgress className="loadingProgress" /> 
         ) : ( 
-          <div className="loadingProgress">&nbsp;</div> 
+          searchResults ? ( searchResults ) : ( <div className="loadingProgress">&nbsp;</div> )
         )
       }
       </section>

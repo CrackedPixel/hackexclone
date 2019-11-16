@@ -595,8 +595,100 @@ body {
 }
 
 .bg-scan {
-  background: darkgreen;
+  background: radial-gradient(#3A4E66, #313C4E, #313C4E);
   overflow: hidden;
+}
+
+.bg-scan .scan__top {
+  margin-top: 8vw;
+  width: 90%;
+}
+
+.bg-scan .scan__top .formik__form--container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.bg-scan .scan__top .formik__form--container .formik__form--field {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  font-size: 4vw;
+  border-radius: 1.5vw;
+  border: 0;
+  padding: 2vw;
+  color: grey;
+  margin-right: 2vw;
+}
+
+@media only screen and (orientation: landscape) {
+  .bg-scan .scan__top .formik__form--container .formik__form--field {
+    font-size: 4vh;
+  }
+}
+
+.bg-scan .scan__top .formik__form--container button {
+  font-family: 'Lucida Console';
+  letter-spacing: -1px;
+  text-transform: capitalize;
+  padding: 1vw 2vw;
+  background: -webkit-gradient(linear, left top, left bottom, from(#E4E4E4), to(#9FA0A2));
+  background: linear-gradient(to bottom, #E4E4E4, #9FA0A2);
+  border-radius: 1.5vw;
+  font-size: 5vw;
+}
+
+@media only screen and (orientation: landscape) {
+  .bg-scan .scan__top .formik__form--container button {
+    font-size: 5vh;
+  }
+}
+
+.bg-scan .scan__results {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 3vw;
+  width: 90%;
+}
+
+.bg-scan .scan__results .scan__result {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  width: 100%;
+  background: rgba(1, 1, 1, 0.3);
+  margin: 0.5vw 0;
+  padding: 4vw 2vw;
+  border: 0;
+  text-align: left;
+  font-size: 3.8vw;
+}
+
+@media only screen and (orientation: landscape) {
+  .bg-scan .scan__results .scan__result {
+    font-size: 3.8vh;
+  }
+}
+
+.bg-scan .scan__results .scan__result span {
+  color: white;
+}
+
+.bg-scan .scan__results .scan__result span:focus {
+  outline: 0 !important;
 }
 
 .bg-scan .scan__footer {

@@ -22,6 +22,11 @@ const error_codes = {
     title: "error",
     message: "login required",
     code: 1
+  },
+  missing_or_invalid_data: {
+    title: "error",
+    message: "missing or invalid data",
+    code: 1
   }
 };
 
