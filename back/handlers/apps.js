@@ -30,7 +30,6 @@ const scan_scan_random = (req, res) => {
   })
 
   Q1.Execute(Q1R => {
-    // console.table(Q1R.data);
     let nRes = Q1R.data;
     let builder = Q1R.data.map((item, i) => {
       return `'${item.charid}'`;
