@@ -1,0 +1,15 @@
+@mixin font_console {
+  font-family: 'Courier New', Courier, monospace;
+}
+
+@mixin font_console2 {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+@mixin font_serif { 
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+@mixin font_regular {
+  font-family: 'Roboto', sans-serif;
+}

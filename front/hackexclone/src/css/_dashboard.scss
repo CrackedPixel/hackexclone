@@ -3,6 +3,7 @@
   @include sizeBox(100%, 100%);
   justify-content: unset;
   overflow: hidden;
+  user-select: none;
 
   .dashboard__top {
     @include titleSection();

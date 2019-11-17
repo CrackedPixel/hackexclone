@@ -1,6 +1,7 @@
 .bg-mydevice {
   background: radial-gradient($bg-2, $bg-1, $bg-1);
   overflow: hidden;
+  user-select: none;
 
   .mydevice__title {
     @include displayFlex(column nowrap, 100%, unset, 5vw, 0, flex-start);

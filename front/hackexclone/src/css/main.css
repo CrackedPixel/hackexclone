@@ -14,6 +14,10 @@ body {
   background: radial-gradient(#3A4E66, #313C4E, #313C4E);
   width: 100%;
   height: 100%;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 @media only screen and (orientation: landscape) {
@@ -240,28 +244,34 @@ body {
   }
 }
 
-.home__logincontainer, .login__footer, .register__footer {
-  margin-bottom: 5vh;
-  margin-top: auto;
+.login__footer, .register__footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: fixed;
+  background: rgba(1, 1, 1, 0.3);
+  width: 100%;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  bottom: 5vh;
+  padding: 1.5vw 0;
 }
 
 @media only screen and (orientation: landscape) {
-  .home__logincontainer, .login__footer, .register__footer {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
+  .login__footer, .register__footer {
     margin: 0 15vh 26vh auto;
     -ms-flex-item-align: end;
         align-self: flex-end;
   }
 }
 
-.home__logincontainer .back-icon, .login__footer .back-icon, .register__footer .back-icon {
+.login__footer .back-icon, .register__footer .back-icon {
   width: 8vw;
   height: 8vw;
 }
 
-.home__logincontainer .linkBtn, .login__footer .linkBtn, .register__footer .linkBtn {
+.login__footer .linkBtn, .register__footer .linkBtn {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -287,7 +297,7 @@ body {
   width: 100%;
   height: unset;
   padding: 0;
-  margin: auto 0 0 0;
+  margin: 30vw 0 0 0;
 }
 
 @media only screen and (orientation: landscape) {
@@ -323,6 +333,8 @@ body {
   background: transparent;
   border: 1px solid #435552;
   color: #E2E8E7;
+  padding: 1vw 2vw;
+  border-radius: 1vw;
 }
 
 @media only screen and (orientation: landscape) {
@@ -364,6 +376,7 @@ body {
   font-size: 8vw;
   background: -webkit-gradient(linear, left top, left bottom, from(#E4E4E4), to(#9FA0A2));
   background: linear-gradient(to bottom, #E4E4E4, #9FA0A2);
+  border-radius: 1vw;
 }
 
 @media only screen and (orientation: landscape) {
@@ -408,6 +421,10 @@ body {
       -ms-flex-pack: unset;
           justify-content: unset;
   overflow: hidden;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 .bg-dashboard .dashboard__top {
@@ -692,15 +709,21 @@ body {
 }
 
 .bg-scan .scan__footer {
-  margin-bottom: 5vh;
-  margin-top: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: fixed;
+  background: rgba(1, 1, 1, 0.3);
+  width: 100%;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  bottom: 5vh;
+  padding: 1.5vw 0;
 }
 
 @media only screen and (orientation: landscape) {
   .bg-scan .scan__footer {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
     margin: 0 15vh 26vh auto;
     -ms-flex-item-align: end;
         align-self: flex-end;
@@ -726,18 +749,205 @@ body {
 
 .bg-bank {
   background: red;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.bg-bank .bank__top__section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  width: 100%;
+}
+
+.bg-bank .bank__top__section .bank__logo__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 100%;
+  background: white;
+  padding: 7vw 0 4vw 0;
+}
+
+.bg-bank .bank__top__section .bank__logo__container .bank__logo {
+  color: #A3E134;
+  font-size: 14vw;
+}
+
+@media only screen and (orientation: landscape) {
+  .bg-bank .bank__top__section .bank__logo__container .bank__logo {
+    font-size: 14vh;
+  }
+}
+
+.bg-bank .bank__top__section .bank__logo__container span {
+  margin-left: 1vw;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: bold;
+  letter-spacing: 0.5vw;
+  font-size: 13vw;
+  text-transform: uppercase;
+  color: #053C74;
+}
+
+@media only screen and (orientation: landscape) {
+  .bg-bank .bank__top__section .bank__logo__container span {
+    font-size: 13vh;
+  }
+}
+
+.bg-bank .bank__top__section .bank__subtitle__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background: #053C74;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.bg-bank .bank__top__section .bank__subtitle__container span {
+  font-size: 4vw;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-style: italic;
+  font-weight: 600;
+  color: #E2E8E7;
+  padding: 3.5vw 0;
+}
+
+@media only screen and (orientation: landscape) {
+  .bg-bank .bank__top__section .bank__subtitle__container span {
+    font-size: 4vh;
+  }
+}
+
+.bg-bank .bank__content__section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  height: 100%;
+  background: #074B8C;
+}
+
+.bg-bank .bank__content__section .bank__login__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  padding: 8vw;
+  width: 100%;
+}
+
+.bg-bank .bank__content__section .bank__login__container span {
+  font-size: 7vw;
+  color: white;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: bold;
+  letter-spacing: 0.1vw;
+  margin-bottom: 3vw;
+}
+
+@media only screen and (orientation: landscape) {
+  .bg-bank .bank__content__section .bank__login__container span {
+    font-size: 7vh;
+  }
+}
+
+.bg-bank .bank__content__section .bank__login__container input {
+  margin: 2vw 0;
+  font-size: 6.5vw;
+  padding: 2vw;
+  border-radius: 1vw;
+  border: 0;
+  pointer-events: none;
+}
+
+@media only screen and (orientation: landscape) {
+  .bg-bank .bank__content__section .bank__login__container input {
+    font-size: 6.5vh;
+  }
+}
+
+.bg-bank .bank__content__section .bank__login__container input:nth-child(2) {
+  font-style: italic;
+}
+
+.bg-bank .bank__content__section .bank__login__container button {
+  margin-top: 3vw;
+  font-size: 5vw;
+  padding: 2vw;
+  border: 0;
+  border-radius: 1vw;
+  font-style: italic;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  background: -webkit-gradient(linear, left top, left bottom, from(#E4E4E4), to(#9FA0A2));
+  background: linear-gradient(to bottom, #E4E4E4, #9FA0A2);
+}
+
+@media only screen and (orientation: landscape) {
+  .bg-bank .bank__content__section .bank__login__container button {
+    font-size: 5vh;
+  }
+}
+
+.bg-bank .bank__content__section .bank__content__proverb {
+  margin-top: 3vw;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 4.5vw;
+  font-weight: bold;
+  font-style: italic;
+  color: #E2E8E7;
+}
+
+@media only screen and (orientation: landscape) {
+  .bg-bank .bank__content__section .bank__content__proverb {
+    font-size: 4.5vh;
+  }
 }
 
 .bg-bank .bank__footer {
-  margin-bottom: 5vh;
-  margin-top: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: fixed;
+  background: rgba(1, 1, 1, 0.3);
+  width: 100%;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  bottom: 5vh;
+  padding: 1.5vw 0;
 }
 
 @media only screen and (orientation: landscape) {
   .bg-bank .bank__footer {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
     margin: 0 15vh 26vh auto;
     -ms-flex-item-align: end;
         align-self: flex-end;
@@ -761,9 +971,17 @@ body {
   color: #A3E134;
 }
 
+.bg-bank .bank__footer .linkBtn {
+  color: white;
+}
+
 .bg-mydevice {
   background: radial-gradient(#3A4E66, #313C4E, #313C4E);
   overflow: hidden;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 .bg-mydevice .mydevice__title {
@@ -928,15 +1146,21 @@ body {
 }
 
 .bg-mydevice .mydevice__footer {
-  margin-bottom: 5vh;
-  margin-top: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: fixed;
+  background: rgba(1, 1, 1, 0.3);
+  width: 100%;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  bottom: 5vh;
+  padding: 1.5vw 0;
 }
 
 @media only screen and (orientation: landscape) {
   .bg-mydevice .mydevice__footer {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
     margin: 0 15vh 26vh auto;
     -ms-flex-item-align: end;
         align-self: flex-end;

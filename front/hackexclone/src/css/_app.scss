@@ -8,12 +8,12 @@
   @include titleSection();
 }
 
-.home__logincontainer, .login__footer, .register__footer {
+.login__footer, .register__footer {
   @include footerSection;
 }
 
 .login__form, .register__form {
-  @include displayFlex(column nowrap, 100%, unset, 0, auto 0 0 0, center);
+  @include displayFlex(column nowrap, 100%, unset, 0, 30vw 0 0 0, center);
   @media #{$landscape} {
     margin-top: auto;
     width: 50%;
@@ -33,6 +33,8 @@
       background: $transparent;
       border: 1px solid darken($secondary, 60%);
       color: $secondary;
+      padding: 1vw 2vw;
+      border-radius: 1vw;
     }
 
     .loadingProgress {
@@ -54,6 +56,7 @@
       }
 
       background: linear-gradient(to bottom, $btn-top, $btn-bottom);
+      border-radius: 1vw;
     }
   }
 
