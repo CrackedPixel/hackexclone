@@ -724,6 +724,43 @@ body {
   color: #A3E134;
 }
 
+.bg-bank {
+  background: red;
+}
+
+.bg-bank .bank__footer {
+  margin-bottom: 5vh;
+  margin-top: auto;
+}
+
+@media only screen and (orientation: landscape) {
+  .bg-bank .bank__footer {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin: 0 15vh 26vh auto;
+    -ms-flex-item-align: end;
+        align-self: flex-end;
+  }
+}
+
+.bg-bank .bank__footer .back-icon {
+  width: 8vw;
+  height: 8vw;
+}
+
+.bg-bank .bank__footer .linkBtn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 6vw;
+  text-decoration: none;
+  color: #A3E134;
+}
+
 .bg-mydevice {
   background: radial-gradient(#3A4E66, #313C4E, #313C4E);
   overflow: hidden;

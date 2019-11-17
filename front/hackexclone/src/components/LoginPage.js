@@ -43,11 +43,7 @@ export const LoginPage = (props) => {
   
   
   const changeTab = (newValue) => e => {
-    if (errorMsg) {
-      e.preventDefault();
-      return; 
-    }
-    if (global_click){
+    if (!errorMsg && global_click){
       props.canClick();
     }else{
       e.preventDefault();
@@ -68,9 +64,7 @@ export const LoginPage = (props) => {
 
   
   const handle_submit = (values) => {
-    if (errorMsg) {
-      return;
-    }
+    if (errorMsg) return;
     if (global_click){
       props.canClick();
       // props.propStateData.setCanClick();
@@ -127,10 +121,7 @@ export const LoginPage = (props) => {
     "popupClass": popupClass,
     "closeDialogue": closeDialogue,
     "errorTitle": errorTitle,
-    "errorMsg": errorMsg,
-    "showEM": errorMsg.split('\n').map((item, i) => {
-      return <span key={i}>{item}</span>
-    })
+    "errorMsg": errorMsg
   }
 
   console.log("RENDERING LOGIN");

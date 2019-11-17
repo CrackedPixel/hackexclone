@@ -27,13 +27,13 @@ export const Dashboard = (props) => {
   }else{
     console.log("Found user");
     if (!user_info.charName) {
-      console.log("set info from session to var");
+      console.log("(dash) set info from session to var");
       mainDispatch(ac.SET_USER_INFO(JSON.parse(sessionStorage.getItem('userInfo'))));
     }
   }
   
   if (did_fade_dashboard === 0) {
-    mainDispatch(ac.SET_DID_FADE_DASHBOARD(1));
+    // mainDispatch(ac.SET_DID_FADE_DASHBOARD(1));
     setTimeout(() => {
       mainDispatch(ac.SET_DID_FADE_DASHBOARD(2));
     }, 151)
@@ -64,7 +64,7 @@ export const Dashboard = (props) => {
       <section className="dashboard__appgrid">
         <AppGridIcon dest="/" clicke={handle_click} icon={<ListIcon className="AppGrid__icon__icon" />} iconName="processes"/>
         <AppGridIcon dest="/scan" clicke={handle_click} icon={<TrackChangesIcon className="AppGrid__icon__icon" />} iconName="scan" />
-        <AppGridIcon dest="/" clicke={handle_click} icon={<AccountBalanceIcon className="AppGrid__icon__icon" />} iconName="bank account" />
+        <AppGridIcon dest="/bank" clicke={handle_click} icon={<AccountBalanceIcon className="AppGrid__icon__icon" />} iconName="bank account" />
         <AppGridIcon dest="/" clicke={handle_click} icon={<ShoppingCartIcon className="AppGrid__icon__icon" />} iconName="store" />
         <AppGridIcon dest="/" clicke={handle_click} icon={<ForumIcon className="AppGrid__icon__icon" />} iconName="messages" />
         <AppGridIcon dest="/" clicke={handle_click} icon={<LaptopIcon className="AppGrid__icon__icon" />} iconName="log" />

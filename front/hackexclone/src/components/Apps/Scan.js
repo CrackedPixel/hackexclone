@@ -5,12 +5,13 @@ import axiosWithAuth from '../../utils/axiosWithAuth';
 import { useSelector, useDispatch } from 'react-redux';
 import * as ac from '../../Actions/actionCommands';
 
-import * as Yup from 'yup';
+// import * as Yup from 'yup';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 
 import CircularProgress from '@material-ui/core/CircularProgress';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { ScanResult } from '../misc/ScanResult';
+import ErrorDialogue from '../misc/ErrorDialogue';
 
 export const Scan = (props) => {
   const mainDispatch = useDispatch();
@@ -34,15 +35,15 @@ export const Scan = (props) => {
     }
   }
 
-  const ip_match = /^(\d+)\.(\d+)\.(\d+)\.(\d+)/;
+  // const ip_match = /^(\d+)\.(\d+)\.(\d+)\.(\d+)/;
 
-  const validate_scan = Yup.object().shape({
-    scanip: Yup.string()
-      .required("Required")
-      .min(8, "Invalid IP")
-      .max(15, "Invalid IP")
-      .matches(ip_match, "Invalid IP")
-  })
+  // const validate_scan = Yup.object().shape({
+  //   scanip: Yup.string()
+  //     .required("Required")
+  //     .min(8, "Invalid IP")
+  //     .max(15, "Invalid IP")
+  //     .matches(ip_match, "Invalid IP")
+  // })
 
   const handle_submit = (values) => {
     console.log("Trying submit", values, errorMsg);
@@ -71,13 +72,6 @@ export const Scan = (props) => {
               return <ScanResult key={i} ite={item} />
             }));
           }
-          // if (res.data.validLogin){
-          //   setFaderClass(fadeoutStart);
-          //   setTimeout(() => {
-          //     sessionStorage.setItem("userInfo", JSON.stringify(res.data.userInfo));
-          //     setIsLoginOk(true); 
-          //   }, 900)
-          // }
         }, 1000)
       })
       .catch(error => {
@@ -93,7 +87,7 @@ export const Scan = (props) => {
   }
 
   const handle_click = e => {
-    if (global_click){
+    if (global_click && !submiting){
       props.canClick();
     }else{
       e.preventDefault();
@@ -142,15 +136,7 @@ export const Scan = (props) => {
         </Formik>
       </section>
       <section className="scan__results">
-      {
-          (!errorMsg) ? ( null ) : ( 
-            <div className={popupClass}>
-              <h3>{errorTitle}</h3>
-              <span>{errorMsg}</span>
-              <button onClick={closeDialogue}>ok</button>
-            </div>
-          )
-        }
+      { <ErrorDialogue popupClass={popupClass} errorTitle={errorTitle} errorMsg={errorMsg} closeDialogue={closeDialogue} label="ok" /> }
       {
         submiting ? ( 
           <CircularProgress className="loadingProgress" /> 

@@ -1,0 +1,7 @@
+.bg-bank {
+  background: $red;
+
+  .bank__footer {
+    @include footerSection;
+  }
+}

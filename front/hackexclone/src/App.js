@@ -13,6 +13,7 @@ import { MyDevice } from './components/Apps/MyDevice';
 
 import './css/main.css';
 import { Scan } from './components/Apps/Scan';
+import { Bank } from './components/Apps/Bank';
 
 const actionCommands = require('./Actions/actionCommands');
 
@@ -45,8 +46,14 @@ function App() {
                 <Route exact path="/register"  render={(props) => <RegisterPage canClick={clickTimer}/>} />
                 <Route exact path="/dashboard"  render={(props) => <Dashboard canClick={clickTimer}/>} />
 
+                { /* Apps */ }
+                {/* <Route exact path="/processes"  render={(props) => <Bank canClick={clickTimer}/>} /> */}
                 <Route exact path="/scan"  render={(props) => <Scan canClick={clickTimer}/>} />
-
+                <Route exact path="/bank"  render={(props) => <Bank canClick={clickTimer}/>} />
+                {/* <Route exact path="/store"  render={(props) => <Bank canClick={clickTimer}/>} /> */}
+                {/* <Route exact path="/messages"  render={(props) => <Bank canClick={clickTimer}/>} /> */}
+                {/* <Route exact path="/log"  render={(props) => <Bank canClick={clickTimer}/>} /> */}
+                {/* <Route exact path="/apps"  render={(props) => <Bank canClick={clickTimer}/>} /> */}
                 <Route exact path="/mydevice"  render={(props) => <MyDevice canClick={clickTimer}/>} />
               
             </Switch>

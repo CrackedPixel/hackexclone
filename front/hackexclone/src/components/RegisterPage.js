@@ -12,7 +12,6 @@ import { ValidatedForm } from './misc/ValidatedForm';
 const sha1 = require('js-sha1');  
 
 export const RegisterPage = (props) => {
-  // const [lcc, slcc] = useState(false);
   const [submiting, setSubmiting] = useState(false);
   const [errorTitle, setErrorTitle] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
@@ -21,16 +20,13 @@ export const RegisterPage = (props) => {
   const global_click = useSelector(state => state.GLOBAL_CLICK);
 
   const handleClicker = e => {
-    if (errorMsg) {
+    if (errorMsg && !global_click) {
       e.preventDefault();
       return; 
     }
-    if (global_click){
-      props.canClick();
-    }else{
-      e.preventDefault();
-      return;
-    }
+    props.canClick();
+
+    // Stuff
   }
 
   const closeDialogue = e => {
@@ -43,43 +39,35 @@ export const RegisterPage = (props) => {
   }
 
   const handle_submit = (values) => {
-    // let encPW = sha1(e.passwd);
-    if (errorMsg) {
-      return;
+    if (errorMsg || !global_click) return;
+    props.canClick();
+    setSubmiting(true);
+    let sendData = {
+      email: values.email,
+      username: values.username,
+      password: sha1(values.passwd)
     }
-    if (global_click){
-      props.canClick();
-      // props.propStateData.setCanClick();
-      setSubmiting(true);
-      // slcc(true);
-      let sendData = {
-        email: values.email,
-        username: values.username,
-        password: sha1(values.passwd)
-      }
-      axiosWithAuth()
-      .post("/register", sendData, {timeout: 2000})
-      .then( res => {
-        setTimeout(() => {
-          console.log(res.data);
-          setSubmiting(false);
-          // slcc(false);
-          if (res.data.message){
-            setErrorTitle(res.data.title);
-            setErrorMsg(res.data.message);
-          }
-        }, 1000)
-      })
-      .catch(error => {
+    axiosWithAuth()
+    .post("/register", sendData, {timeout: 2000})
+    .then( res => {
+      setTimeout(() => {
+        console.log(res.data);
         setSubmiting(false);
-        setErrorTitle("Error");
-        if (error.code === "ECONNABORTED"){
-          setErrorMsg("Unable to connect. Please try again later");
-          return;
+        if (res.data.message){
+          setErrorTitle(res.data.title);
+          setErrorMsg(res.data.message);
         }
-        setErrorMsg(error.message);
-      })
-    }
+      }, 1000)
+    })
+    .catch(error => {
+      setSubmiting(false);
+      setErrorTitle("Error");
+      if (error.code === "ECONNABORTED"){
+        setErrorMsg("Unable to connect. Please try again later");
+        return;
+      }
+      setErrorMsg(error.message);
+    })
   }
 
   const validate_register = Yup.object().shape({
@@ -103,10 +91,7 @@ export const RegisterPage = (props) => {
     "popupClass": popupClass,
     "closeDialogue": closeDialogue,
     "errorTitle": errorTitle,
-    "errorMsg": errorMsg,
-    "showEM": errorMsg.split('\n').map((item, i) => {
-      return <span key={i}>{item}</span>
-    })
+    "errorMsg": errorMsg
   }
 
   return (
