@@ -6,7 +6,9 @@ const actions = {
   G_DID_FADE_DASHBOARD: 5,
   S_DID_FADE_DASHBOARD: 6,
   G_USER_INFO: 7,
-  S_USER_INFO: 8
+  S_USER_INFO: 8,
+  G_OTHER_USER: 9,
+  S_OTHER_USER: 10
 }
 
 module.exports = actions;

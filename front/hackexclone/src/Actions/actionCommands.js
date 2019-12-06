@@ -29,4 +29,11 @@ export const SET_USER_INFO = newVal => {
   }
 }
 
+export const SET_OTHER_USER = newVal => {
+  return {
+    type: ma.S_OTHER_USER,
+    payload: newVal
+  }
+}
+
 // module.exports = {SET_CHANGING_LOGIN, SET_GLOBAL_CLICK, SET_DID_FADE_DASHBOARD, SET_USER_INFO}

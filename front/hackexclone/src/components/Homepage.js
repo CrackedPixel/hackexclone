@@ -39,8 +39,8 @@ export const Homepage = (props) => {
       <section className="home__menuList">
         <Link onClick={handleClicker} className="menuBtn" to="/login">Login</Link>
       </section>
-      <section className="home__logincontainer">
-        
+      <section className="home__bottomcontainer">
+        <p>Note: This app is ONLY designed to be viewed on a mobile device. If you are on a desktop, please use the dev tools to view it as mobile</p>
       </section>
     </div>
   )

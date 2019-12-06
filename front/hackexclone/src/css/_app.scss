@@ -8,6 +8,32 @@
   @include titleSection();
 }
 
+.home__menuList {
+  display: flex;
+  margin-top: 20vw;
+
+  .menuBtn {
+    justify-content: center;
+    align-items: center;
+    @include btnDefault(80vw, 80vh, 12vw, 12vh, 8vw, 8vh, 1vw, 1vw, linear-gradient(to bottom, $btn-top, $btn-bottom));
+    text-transform: capitalize;
+  }
+} 
+
+.home__bottomcontainer {
+  display: flex;
+  margin-top: auto;
+  margin-bottom: 3vw;
+  width: 80vw;
+  height: 15vh;
+
+  p {
+    @include scaleFont(3vw, 3vh);
+    // padding: 0 18vw;
+    color: $white;
+  }
+}
+
 .login__footer, .register__footer {
   @include footerSection;
 }

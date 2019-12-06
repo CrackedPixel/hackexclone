@@ -15,6 +15,7 @@ import PhoneIphoneIcon from '@material-ui/icons/PhoneIphone';
 
 import * as ac from '../Actions/actionCommands';
 
+
 export const Dashboard = (props) => {
   const mainDispatch = useDispatch();
   const global_click = useSelector(state => state.GLOBAL_CLICK);
@@ -48,7 +49,7 @@ export const Dashboard = (props) => {
     }
   }
 
-  console.log("DASHBOARD__RENDER");
+  console.log("DASHBOARD__RENDER");  
 
   return (
     <div className="appPage bg-dashboard alwaysBack">
@@ -57,7 +58,7 @@ export const Dashboard = (props) => {
         <h1>Dashboard</h1>
         {
           user_info.charName ? (
-            <div className="userinfo__container"><span className="userinfo__name">{user_info.charName}</span><span>&nbsp;level&nbsp;</span><span className="userinfo__level">{user_info.level}</span></div>
+            <div className="userinfo__container"><span className="userinfo__name">{user_info.charName}</span><span>&nbsp;level&nbsp;</span><span className="userinfo__level">{user_info.charLevel}</span></div>
           ) : ( null )
         }
       </section>
